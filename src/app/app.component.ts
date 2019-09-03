@@ -22,6 +22,12 @@ export class AppComponent {
       url: '/',
       icon: 'log-out'
     }
+    // ,
+    // {
+    //   title: 'Vehicles',
+    //   url: '/vehicle-list',
+    //   icon: 'bus'
+    // }
   ];
 
   constructor(
