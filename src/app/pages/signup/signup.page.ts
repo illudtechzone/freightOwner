@@ -6,6 +6,7 @@ import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { KeycloakAdminClient } from 'keycloak-admin/lib/client';
 import { UtilService } from 'src/app/services/util.service';
+import { CommandResourceService } from 'src/app/api/services/command-resource.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './signup.page.html',
@@ -17,7 +18,7 @@ export class SignUpPage implements OnInit {
   username: string;
   password: string;
   email: string;
-  phone: string;
+  phone: number;
   confirm: string;
 
   ngOnInit(): void {
@@ -25,7 +26,8 @@ export class SignUpPage implements OnInit {
   }
 
   constructor(private navCtrl: NavController, private util: UtilService,
-              private keycloakService: KeycloakService, ) {
+              private keycloakService: KeycloakService,
+              private commandResourceService:CommandResourceService) {
 
   }
   signup() {
@@ -61,15 +63,16 @@ export class SignUpPage implements OnInit {
     this.keycloakService.authenticate({ username: this.email, password: this.password },
       () => {
         console.log('user data ', this.email);
-        // tslint:disable-next-line: max-line-length
-        // this.commandResourceService.createRiderIfNotExistUsingPOST({idpcode: this.username, firstName: this.firstName, mobilenumber: this.phone,email:this.email}).subscribe(res => {
-        //   console.log('created user in microservice ', res);
-        //   this.keycloakService.logout();
-        //   this.navCtrl.navigateForward('/login');
-        // },
-        // err => {
-        //   console.log('created user in microservice ', err);
-        // });
+
+        this.commandResourceService.createCompanyUsingPOST({name:this.firstName,companyIdpCode:this.email,email:this.email,phoneNumber:this.phone}).subscribe(res => {
+            console.log('created user in microservice ', res);
+            this.keycloakService.logout();
+            this.navCtrl.navigateForward('/login');
+          },
+          err => {
+            console.log('error creating company in microservice ', err);
+          });
+
       },
       () => {
         this.util.createToast('an error occured');

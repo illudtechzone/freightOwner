@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Vehicle info
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-item class="item-inner">
+      <ion-label color="medium" position="floating">Unique name or number</ion-label>
+      <ion-input type="text" background="light" [(ngModel)]="vehicle.name" ></ion-input>
+    </ion-item>
+    <ion-item class="item-inner">
+      <ion-label color="medium" position="floating" >Regnumber </ion-label>
+      <ion-input background="light" [(ngModel)]="vehicle.regumber"></ion-input>
+ 
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select placeholder="Select One" (ionChange)="selectTruckType($event)" disabled="true" value="vehicle.vehicleType">
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+      <ion-item>
+          <ion-label>Capacity</ion-label>
+          <ion-select placeholder="Select One" (ionChange)="capacityOptions($event)" disabled="true" value="TON"> 
+            <ion-select-option value="TON" >TON</ion-select-option>
+            <ion-select-option value="FEET">FEET</ion-select-option>
+          </ion-select>
+        </ion-item>
+    <ion-item class="item-inner">
+      <ion-label color="medium" position="floating">Capacity</ion-label>
+      <ion-input background="light" [(ngModel)]="vehicle.capacity"></ion-input>
+    </ion-item>
+  </ion-card>
+</ion-content>

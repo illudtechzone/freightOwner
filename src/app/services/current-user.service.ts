@@ -20,6 +20,7 @@ export class CurrentUserService {
           },
           err => {
             console.log('error getting user profile ', err);
+            reject();
           }
         );
 

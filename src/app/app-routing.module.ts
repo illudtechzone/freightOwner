@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
-     canActivate:[AuthGuardService]
+    canActivate:[AuthGuardService]
   },
   {
     path: 'login',
@@ -21,8 +21,17 @@ const routes: Routes = [
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignUpPageModule)
   },
-  { path: 'select-place', loadChildren: './pages/select-place/select-place.module#SelectPlacePageModule' },
-  { path: 'vehicle-list', loadChildren: './pages/vehicle-list/vehicle-list.module#VehicleListPageModule' },
+  { path: 'select-place', loadChildren: './pages/select-place/select-place.module#SelectPlacePageModule',
+  canActivate:[AuthGuardService]
+},
+  { path: 'vehicle-list', loadChildren: './pages/vehicle-list/vehicle-list.module#VehicleListPageModule',
+  canActivate:[AuthGuardService]
+},
+  { path: 'vehicle-detail', loadChildren: './pages/vehicle-detail/vehicle-detail.module#VehicleDetailPageModule',
+  canActivate:[AuthGuardService]
+},
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
+  { path: 'booking-list', loadChildren: './pages/booking-list/booking-list.module#BookingListPageModule' },
 ];
 
 @NgModule({

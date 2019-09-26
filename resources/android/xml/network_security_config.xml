@@ -3,7 +3,7 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
         <domain includeSubdomains="true">35.232.29.128</domain>
- 	<!-- <domain includeSubdomains="true">dev.servers.divisosofttech.com</domain> -->
+        <domain includeSubdomains="true">dev.servers.divisosofttech.com</domain> 
       	<domain includeSubdomains="true">34.74.192.113</domain>
 
     </domain-config>

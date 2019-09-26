@@ -1,56 +1,75 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-button (click)="dismiss()">
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>
-      Add Vehicle
-    </ion-title>
+{{headerName}}
+  </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-card>
-    <ion-item class="item-inner">
-      <ion-label color="medium" position="floating"
-        >Unique name or number</ion-label
-      >
-      <ion-input type="text" background="light"></ion-input>
-    </ion-item>
-    <ion-item class="item-inner">
-      <ion-label color="medium" position="floating">Regnumber </ion-label>
-      <ion-input background="light"></ion-input>
-    </ion-item>
+  <ion-card>
 
-    <ion-item>
-      <ion-label>Type</ion-label>
-      <ion-select placeholder="Select One">
-        <ion-select-option value="TATA ACE">TEMPO</ion-select-option>
-        <ion-select-option value="BOLERO PICKUP">PICK-UP</ion-select-option>
-        <ion-select-option value="CLOSED 20FT">TORRAS</ion-select-option>
-        <ion-select-option value="TRUCK 9 TON">CARGO</ion-select-option>
+    <ion-item class="item-inner">
+      <ion-label color="medium" position="floating" >Regnumber </ion-label>
+      <ion-input background="light" [(ngModel)]="vehicle.registerNo"></ion-input>
+    </ion-item>
+    
+   <!-- <ion-item>
+       <ion-label>Type</ion-label>
+      <ion-select placeholder="Select One" (ionChange)="selectTruckType($event)" [(ngModel)]="vehicle.vehicleType">
+        <ion-select-option value="TEMPO">TEMPO</ion-select-option>
+        <ion-select-option value="PICK-UP">PICK-UP</ion-select-option>
+        <ion-select-option value="TORRAS">TORRAS</ion-select-option>
+        <ion-select-option value="CARGO">CARGO</ion-select-option>
       </ion-select>
-    </ion-item>
+    </ion-item> -->
+
   </ion-card>
-  <ion-card>    <ion-item class="item-inner">
-      <ion-label color="medium" position="floating">Capacity</ion-label>
-      <ion-input background="light"></ion-input>
-    </ion-item>
-  <ion-item>
-    <ion-select placeholder="Select One">
-      <ion-select-option value="TON">TON</ion-select-option>
-      <ion-select-option value="FEET">PICK-UP</ion-select-option>
-    </ion-select>
+  <ion-card>
+  <ion-card-header>
+    <ion-card-title text-center>
+      Specifications
+    </ion-card-title>
+  </ion-card-header>
+  <ion-item class="item-inner">
+    <ion-label color="medium" position="floating" >Max weight </ion-label>
+    <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.maxWeight"></ion-input>
+  </ion-item>
+  <ion-item class="item-inner">
+    <ion-label color="medium" position="floating" > Height </ion-label>
+    <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.height"></ion-input>
+  </ion-item>
+  <ion-item class="item-inner">
+    <ion-label color="medium" position="floating" > Length </ion-label>
+    <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.length"></ion-input>
   </ion-item>
 </ion-card>
+  <!-- <ion-card>
+      <ion-item>
+          <ion-label>Capacity</ion-label>
+          <ion-select placeholder="Select One" (ionChange)="capacityOptions($event)" [(ngModel)]="vehicle.capacityType">
+            <ion-select-option value="TON" >TON</ion-select-option>
+            <ion-select-option value="FEET">FEET</ion-select-option>
+          </ion-select>
+        </ion-item>
+    <ion-item class="item-inner">
+      <ion-label color="medium" position="floating">Capacity</ion-label>
+      <ion-input background="light" [(ngModel)]="vehicle.capacity"></ion-input>
+    </ion-item>
+  </ion-card> -->
 
-  <ion-item class="item-inner">
-    <ion-label color="medium" position="floating">Password</ion-label>
-    <ion-input type="password"></ion-input>
-  </ion-item>
+ 
+  <ion-row>
+      <ion-col>
+        <ion-button   color="light" expand="block" (click)="save()">save</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button  color="light" expand="block" (click)="dismiss()">cancel</ion-button>
+      </ion-col>
+    </ion-row>
 
-  <ion-button color="tertiary" expand="block" margin-top margin-bottom
-    >Register</ion-button
-  >
 </ion-content>

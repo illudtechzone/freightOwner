@@ -4,7 +4,6 @@ import { Platform, ToastController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { OAuthService } from 'angular-oauth2-oidc';
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -17,17 +16,23 @@ export class AppComponent {
       url: '/home',
       icon: 'home'
     },
+     {
+      title: 'Vehicles',
+      url: '/vehicle-list',
+      icon: 'bus'
+    },
+    {
+      title: 'Bookings',
+      url: '/vehicle-list',
+      icon: 'document'
+    },
     {
       title: 'Logout',
       url: '/',
       icon: 'log-out'
     }
-    // ,
-    // {
-    //   title: 'Vehicles',
-    //   url: '/vehicle-list',
-    //   icon: 'bus'
-    // }
+   
+   
   ];
 
   constructor(
@@ -57,8 +62,12 @@ export class AppComponent {
   }
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+   
+// let status bar overlay webview
+this.statusBar.styleDefault();
+// set status bar to white
+this.statusBar.backgroundColorByHexString('#e6e6e6');
+this.splashScreen.hide();
     });
   }
 }
