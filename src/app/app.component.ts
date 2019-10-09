@@ -4,6 +4,7 @@ import { Platform, ToastController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { OwnerService } from './services/owner.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -31,8 +32,8 @@ export class AppComponent {
       url: '/',
       icon: 'log-out'
     }
-   
-   
+
+
   ];
 
   constructor(
@@ -42,11 +43,13 @@ export class AppComponent {
     private oauthService: OAuthService,
     private toastController: ToastController,
     private navCtrl: NavController,
+    private ownerService: OwnerService
   ) {
     this.initializeApp();
   }
   logout() {
     console.log('Logout clicked');
+    this.ownerService.clearOwnerDetails();
     this.oauthService.logOut();
     this.presentToastLogout();
     this.navCtrl.navigateRoot('/login');
@@ -62,7 +65,7 @@ export class AppComponent {
   }
   initializeApp() {
     this.platform.ready().then(() => {
-   
+
 // let status bar overlay webview
 this.statusBar.styleDefault();
 // set status bar to white

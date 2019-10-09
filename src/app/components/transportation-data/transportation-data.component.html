@@ -3,14 +3,14 @@
 box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);">
 
   <ion-item>
-    <ion-card-subtitle>Manu kg</ion-card-subtitle>
+    <ion-card-subtitle>{{(customer|async)?.customerIdpCode}}</ion-card-subtitle>
 
     <ion-avatar slot="start">
       <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
     </ion-avatar>
   </ion-item>
   <ion-card-content>
-    <ion-text>Phone:7034397935</ion-text>
+    <ion-text>Phone:{{(customer|async)?.phoneNumber}}</ion-text>
   </ion-card-content>
 
   <div (click)="moreInfo()">
@@ -21,7 +21,7 @@ box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);">
 
       <ion-text>
         <i>
-          Palakkad Junction Railway Station, Olavakode 2e43r3r, Palakkad, Kerala
+          {{freightView.freight.pickupAddress}}
         </i>
       </ion-text>
 
@@ -32,14 +32,18 @@ box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);">
     <ion-card-content style="border-bottom: 3px solid #5855b1;">
       <ion-text>
         <i>
-          Palakkad Junction Railway Station, Olavakode, Palakkad, Kerala
+            {{freightView.freight.destinationAddress}}
         </i>
       </ion-text>
     </ion-card-content>
-    <ion-item line="full">
-      <ion-input type="number" placeholder=" Ruogh budget in numbers ex:1999 " value="1000"
-        readonly="!freightView.isEdit">
-      </ion-input>
+    <ion-item line="full" *ngIf="freightView.freight.estimatedAmount" >
+
+          <ion-input type="number" placeholder=" Ruogh budget in numbers ex:1999 " [value]="freightView.freight.estimatedAmount"
+          readonly="!freightView.isEdit">Rs
+        </ion-input>
+
+
+
       <ion-text slot="end"> Customer budget</ion-text>
     </ion-item>
   </div>
@@ -47,38 +51,47 @@ box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);">
     <ion-item>
 
       <ion-label>Goods Type</ion-label>
-      <ion-text slot="end">Wood</ion-text>
+      <ion-text slot="end">Wood  {{freightView.freight.type}}</ion-text>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder=" Ruogh goods weight in kg ex:1000" readonly="!freightView.isEdit"></ion-input>
+      <ion-input type="text" placeholder=" Ruogh goods weight in kg ex:1000" [value]="freightView.freight.weight" readonly="!freightView.isEdit"></ion-input>
       <ion-text slot="end">kg</ion-text>
 
     </ion-item>
 
     <ion-item line="full">
       <ion-text>
-        23*34*56
+         {{freightView.freight.length}} L * {{freightView.freight.width}} W * {{freightView.freight.height}} H    23*34*56
       </ion-text>
       <ion-text slot="end">volume</ion-text>
     </ion-item>
     <ion-item>
       <ion-label>Delivery date</ion-label>
-      <ion-datetime display-format="D, MMMM YYYY" picker-format="DD MM YYYY" value="07-27-2000"></ion-datetime>
+      <ion-datetime display-format="D, MMMM YYYY" picker-format="DD MM YYYY" [value]="freightView.freight.deliveryDate" readonly="!freightView.isEdit"></ion-datetime>
     </ion-item>
     <ion-item line="full">
       <ion-label>Fragile</ion-label>
-      <ion-icon name="checkbox-outline" color="primary"></ion-icon>
-      <ion-icon name="square-outline"></ion-icon>
+      <ion-icon name="checkbox-outline" color="primary" *ngIf="freightView.freight.fragile"></ion-icon>
+      <ion-icon name="square-outline" *ngIf="!freightView.freight.fragile"></ion-icon>
     </ion-item>
 
 
   </div>
-  <ion-item>
-    <ion-input placeholder="Enter your budget"></ion-input>
+  <div *ngIf="quoatationList ;let ql">
+  <ion-item *ngIf="(quoatationList.length == 0)  ">
+    <ion-input placeholder="Enter your budget"  [(ngModel)]="quotation.amount"></ion-input>
     <ion-text slot="end">INR</ion-text>
+    <ion-item>
+      <ion-button slot="start" (click)="sendQuotation()">Intrested</ion-button>
+      <ion-button slot="end"(click)="deleteElement()">Reject</ion-button>
+    </ion-item>
   </ion-item>
-  <ion-item>
-    <ion-button slot="start">Intrested</ion-button>
-    <ion-button slot="end">Reject</ion-button>
+
+    <ion-item *ngIf="(quoatationList.length > 0)  " color="success">
+      <ion-input placeholder="Enter your budget"  [value]="ql[0].amount"> Rs</ion-input>
+      <ion-text slot="end"> Quoted price</ion-text>
   </ion-item>
+  </div>
+
+
 </ion-card>
