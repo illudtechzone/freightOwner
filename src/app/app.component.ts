@@ -22,15 +22,21 @@ export class AppComponent {
       icon: 'bus'
     },
     {
-      title: 'Bookings',
-      url: '/vehicle-list',
-      icon: 'document'
+      title: 'Employes',
+      url: '/employes',
+      icon: 'people'
     },
+    // {
+    //   title: 'Bookings',
+    //   url: '/booking-list',
+    //   icon: 'document'
+    // },
     {
       title: 'Logout',
       url: '/',
       icon: 'log-out'
     }
+
    
    
   ];

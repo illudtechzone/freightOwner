@@ -7,6 +7,7 @@ import { Vehicle } from './../../dtos/vehicle';
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { VehicleDTO } from 'src/app/api/models';
+import { QueryResourceService } from 'src/app/api/services/query-resource.service';
 
 @Component({
   selector: 'app-add-vehicle',
@@ -23,7 +24,9 @@ export class AddVehicleComponent implements OnInit {
     private commandResourceService:CommandResourceService,
     private utilService:UtilService,
     private currentUserService:CurrentUserService,
-    private commonService:CommonService) {
+    private commonService:CommonService,
+    private queryService:QueryResourceService)
+     {
     navParams.get('vehicle');
     navParams.get('headerName');
 
@@ -32,20 +35,41 @@ export class AddVehicleComponent implements OnInit {
    }
   ngOnInit() {
    
-    this.commonService.getCompany().then((result:any) => {
-      console.log('sucessful geting the company', result);
-     // this.vehicle.companyId=result.id;
-     this.vehicle.companyId=3;
-      console.log('uid ',this.vehicle.companyId);
-    }, error => {
-      console.log('error geting the user', error);
+    if(this.headerName==='Edit Vehicle'){
+      this.initializingEdit();
+      console.log('vehicle to be edited ',this.vehicle);
+    }
+    else{
+      
+      this.initializingSave();
+
 
     }
-    );
-    
    
 
   }
+  initializingSave(){
+
+    this.commonService.getCompany().then(res1=>{
+      console.log('got company id ',res1);
+      this.vehicle.companyId=res1.id;
+    });
+  }
+initializingEdit(){
+  
+  //method to get the vehicle lookup becuse only vehicle is passing through navparams
+  this.queryService.findVehicleLookUpByIdUsingGET(this.vehicle.vehicleLookupId).subscribe((res:any) => {
+    console.log('got vehicleLookup in microservice ', res);
+    this.vehicleLookUpDTO=res;
+  
+  },
+  err => {
+    console.log('error gettig vehicle lookUp ', err);
+    
+  });
+  // this.queryService.findAllFreightsUsingGET({requestedStatus: 'CONFIRM'}).subscribe();
+}
+
 
   dismiss() {
     console.log('>>>',this.vehicle);
@@ -70,10 +94,11 @@ export class AddVehicleComponent implements OnInit {
   
   save(){
     console.log(' bc enterd in if');
-    
     if(this.headerName==='Add Vehicle'){
-      console.log('enterd in if');
       this.saveVehicle();
+    }
+    else{
+      this.editVehicle();
     }
  
   }
@@ -86,8 +111,9 @@ export class AddVehicleComponent implements OnInit {
     console.log('created vehicleLookUp ',res1);
     this.vehicle.vehicleLookupId=res1.id
     console.log('vehicle is >> ',this.vehicle)
-     this.commandResourceService.createVehicleUsingPOST(this.vehicle).subscribe(res => {
+     this.commandResourceService.createVehicleUsingPOST(this.vehicle).subscribe((res:any) => {
       console.log('created vehicle in microservice ', res);
+      this.vehicle=res;
       loader.dismiss()
       this.dismiss();
     },
@@ -110,23 +136,23 @@ editVehicle(){
   this.utilService.createLoader()
   .then(loader => {
     loader.present();
-this.commandResourceService.createVehicleLookUpUsingPOST(this.vehicleLookUpDTO).subscribe((res1:any)=>{
-  console.log('created vehicleLookUp ',res1);
+this.commandResourceService.updateVehicleLookUpUsingPUT(this.vehicleLookUpDTO).subscribe((res1:any)=>{
+  console.log('updated vehicleLookUp ',res1);
   this.vehicle.vehicleLookupId=res1.id
   console.log('vehicle is >> ',this.vehicle)
-   this.commandResourceService.createVehicleUsingPOST(this.vehicle).subscribe(res => {
-    console.log('created vehicle in microservice ', res);
+   this.commandResourceService.updateVehicleUsingPUT(this.vehicle).subscribe(res => {
+    console.log('updated vehicle in microservice ', res);
     loader.dismiss()
     this.dismiss();
   },
   err => {
-    console.log('error creating vehicle in microservice ', err);
+    console.log('error updatging vehicle in microservice ', err);
     loader.dismiss()
     this.dismiss();
   });
 },
 err=>{
-     console.log('error creating  vehicle look up in microservice ', err);
+     console.log('error updatging  vehicle look up in microservice ', err);
      loader.dismiss()
      this.dismiss();
 

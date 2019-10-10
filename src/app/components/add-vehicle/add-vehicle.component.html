@@ -36,18 +36,49 @@
     </ion-card-title>
   </ion-card-header>
   <ion-item class="item-inner">
-    <ion-label color="medium" position="floating" >Max weight </ion-label>
-    <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.maxWeight"></ion-input>
+
+    <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.maxWeight" placeholder="Max weigh"></ion-input>
+    <ion-text slot="end">Kg</ion-text>
   </ion-item>
   <ion-item class="item-inner">
-    <ion-label color="medium" position="floating" > Height </ion-label>
-    <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.height"></ion-input>
+    <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.height" placeholder="Height"></ion-input>
+    <ion-text slot="end">Feet</ion-text>
+
   </ion-item>
   <ion-item class="item-inner">
-    <ion-label color="medium" position="floating" > Length </ion-label>
-    <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.length"></ion-input>
+    <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.length" placeholder="Length"></ion-input>
+    <ion-text slot="end">Feet</ion-text>
+
+  </ion-item>
+  <ion-item>
+
   </ion-item>
 </ion-card>
+<ion-card *ngIf="headerName==='Add Vehicle'" >
+  <ion-card-header>
+    <ion-card-title text-center>
+      Documents
+    </ion-card-title>
+  </ion-card-header>
+  <ion-item class="item-inner">
+    <ion-label color="medium" position="floating" >Document name</ion-label>
+    <ion-input background="light" ></ion-input>
+  </ion-item>
+  
+    <ion-item>
+      <ion-text slot="start" position="floating"> Valid from  </ion-text>
+      <ion-datetime slot="end" displayFormat="MM/DD/YYYY" min="1994-03-14" max="2030-12-09" ></ion-datetime>
+    </ion-item>
+    
+  
+ 
+
+    <ion-item>
+      <ion-text slot="start" position="floating"> Valid to</ion-text>
+      <ion-datetime slot="end" displayFormat="MM/DD/YYYY" min="1994-03-14" max="2030-12-09" ></ion-datetime>
+    </ion-item>
+</ion-card>
+
   <!-- <ion-card>
       <ion-item>
           <ion-label>Capacity</ion-label>

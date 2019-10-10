@@ -13,6 +13,8 @@ import { DriverDTO } from '../models/driver-dto';
 import { FreightDTO } from '../models/freight-dto';
 import { VehicleDTO } from '../models/vehicle-dto';
 import { VehicleLookUpDTO } from '../models/vehicle-look-up-dto';
+import { CustomerStatus } from '../models/customer-status';
+import { QuotationDTO } from '../models/quotation-dto';
 
 /**
  * Command Resource
@@ -30,6 +32,9 @@ class CommandResourceService extends __BaseService {
   static readonly createFreightUsingPOSTPath = '/api/command/create/freight';
   static readonly createVehicleUsingPOSTPath = '/api/command/create/vehicle';
   static readonly createVehicleLookUpUsingPOSTPath = '/api/command/create/vehiclelookup';
+  static readonly customerStatusUsingPOSTPath = '/api/command/customer/status/{taskId}';
+  static readonly deleteVehicleUsingDELETEPath = '/api/command/delete/vehicle/{vehicleId}/{vehicleLookupId}';
+  static readonly sendQuatationUsingPOSTPath = '/api/command/sendQuatation/{taskId}';
   static readonly updateCompanyUsingPUTPath = '/api/command/update/company';
   static readonly updateCustomerUsingPUTPath = '/api/command/update/customer';
   static readonly updateDriverUsingPUTPath = '/api/command/update/driver';
@@ -369,6 +374,135 @@ class CommandResourceService extends __BaseService {
   }
 
   /**
+   * @param params The `CommandResourceService.CustomerStatusUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `customerStatus`: customerStatus
+   */
+  customerStatusUsingPOSTResponse(params: CommandResourceService.CustomerStatusUsingPOSTParams): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.customerStatus;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/command/customer/status/${params.taskId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param params The `CommandResourceService.CustomerStatusUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `customerStatus`: customerStatus
+   */
+  customerStatusUsingPOST(params: CommandResourceService.CustomerStatusUsingPOSTParams): __Observable<null> {
+    return this.customerStatusUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param params The `CommandResourceService.DeleteVehicleUsingDELETEParams` containing the following parameters:
+   *
+   * - `vehicleLookupId`: vehicleLookupId
+   *
+   * - `vehicleId`: vehicleId
+   */
+  deleteVehicleUsingDELETEResponse(params: CommandResourceService.DeleteVehicleUsingDELETEParams): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/api/command/delete/vehicle/${params.vehicleId}/${params.vehicleLookupId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param params The `CommandResourceService.DeleteVehicleUsingDELETEParams` containing the following parameters:
+   *
+   * - `vehicleLookupId`: vehicleLookupId
+   *
+   * - `vehicleId`: vehicleId
+   */
+  deleteVehicleUsingDELETE(params: CommandResourceService.DeleteVehicleUsingDELETEParams): __Observable<null> {
+    return this.deleteVehicleUsingDELETEResponse(params).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param params The `CommandResourceService.SendQuatationUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `response`: response
+   */
+  sendQuatationUsingPOSTResponse(params: CommandResourceService.SendQuatationUsingPOSTParams): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.response;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/command/sendQuatation/${params.taskId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param params The `CommandResourceService.SendQuatationUsingPOSTParams` containing the following parameters:
+   *
+   * - `taskId`: taskId
+   *
+   * - `response`: response
+   */
+  sendQuatationUsingPOST(params: CommandResourceService.SendQuatationUsingPOSTParams): __Observable<null> {
+    return this.sendQuatationUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
    * @param company company
    * @return OK
    */
@@ -586,6 +720,54 @@ class CommandResourceService extends __BaseService {
 }
 
 module CommandResourceService {
+
+  /**
+   * Parameters for customerStatusUsingPOST
+   */
+  export interface CustomerStatusUsingPOSTParams {
+
+    /**
+     * taskId
+     */
+    taskId: string;
+
+    /**
+     * customerStatus
+     */
+    customerStatus: CustomerStatus;
+  }
+
+  /**
+   * Parameters for deleteVehicleUsingDELETE
+   */
+  export interface DeleteVehicleUsingDELETEParams {
+
+    /**
+     * vehicleLookupId
+     */
+    vehicleLookupId: number;
+
+    /**
+     * vehicleId
+     */
+    vehicleId: number;
+  }
+
+  /**
+   * Parameters for sendQuatationUsingPOST
+   */
+  export interface SendQuatationUsingPOSTParams {
+
+    /**
+     * taskId
+     */
+    taskId: string;
+
+    /**
+     * response
+     */
+    response: QuotationDTO;
+  }
 }
 
 export { CommandResourceService }

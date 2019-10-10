@@ -1,3 +1,5 @@
+import { CommandResourceService } from 'src/app/api/services';
+import { CurrentUserService } from './../../services/current-user.service';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
@@ -16,7 +18,9 @@ export class LoginPage implements OnInit {
               private navCtrl: NavController,
               private toastController: ToastController,
               private util: UtilService,
-              private keycloakService: KeycloakService) { }
+              private commandService:CommandResourceService,
+              private keycloakService: KeycloakService,
+              private currentUserService:CurrentUserService) { }
 
   ngOnInit() {
     if (this.oauthService.hasValidAccessToken()) {
@@ -41,7 +45,15 @@ export class LoginPage implements OnInit {
         this.keycloakService.authenticate({ username: this.email, password: this.password },
           () => {
             loader.dismiss();
-            console.log('slsklkslkks');
+            this.commandService.createcompanyIfnotExistUsingPOST({companyIdpCode:this.email}).subscribe(res=>{
+              this.currentUserService.getCurrentUser(true).then(
+                res=>{
+                  console.log('current user ',res);
+  
+                }
+              );
+            });
+         
             this.navCtrl.navigateForward('/home');
           },
           () => {

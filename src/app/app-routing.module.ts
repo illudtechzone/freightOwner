@@ -32,6 +32,7 @@ const routes: Routes = [
 },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
   { path: 'booking-list', loadChildren: './pages/booking-list/booking-list.module#BookingListPageModule' },
+  { path: 'employes', loadChildren: './pages/employes/employes.module#EmployesPageModule' },
 ];
 
 @NgModule({
