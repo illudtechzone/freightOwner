@@ -13,7 +13,7 @@ import { Driver } from '../models/driver';
 import { VehicleLookUp } from '../models/vehicle-look-up';
 import { FreightDTO } from '../models/freight-dto';
 import { Quotation } from '../models/quotation';
-import { Vehicle } from '../models/vehicle';
+import { VehicleDTO } from '../models/vehicle-dto';
 import { DataResponse } from '../models/data-response';
 
 /**
@@ -436,7 +436,7 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllvehiclesUsingGETResponse(params: QueryResourceService.FindAllvehiclesUsingGETParams): __Observable<__StrictHttpResponse<Array<Vehicle>>> {
+  findAllvehiclesUsingGETResponse(params: QueryResourceService.FindAllvehiclesUsingGETParams): __Observable<__StrictHttpResponse<Array<VehicleDTO>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -457,7 +457,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Vehicle>>;
+        return _r as __StrictHttpResponse<Array<VehicleDTO>>;
       })
     );
   }
@@ -474,9 +474,9 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllvehiclesUsingGET(params: QueryResourceService.FindAllvehiclesUsingGETParams): __Observable<Array<Vehicle>> {
+  findAllvehiclesUsingGET(params: QueryResourceService.FindAllvehiclesUsingGETParams): __Observable<Array<VehicleDTO>> {
     return this.findAllvehiclesUsingGETResponse(params).pipe(
-      __map(_r => _r.body as Array<Vehicle>)
+      __map(_r => _r.body as Array<VehicleDTO>)
     );
   }
 

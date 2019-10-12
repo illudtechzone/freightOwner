@@ -10,8 +10,10 @@
 </ion-header>
 
 <ion-content>
-  <app-transportation-data [freightView]="freightView" ></app-transportation-data><br>
-  <app-transportation-data [freightView]="freightView" ></app-transportation-data><br>
-  <app-transportation-data [freightView]="freightView" ></app-transportation-data><br>
+  <div *ngFor="let freight of freights; let i=index">
+
+  <app-transportation-data [freight]="freight" (elementDeleted)="deleteElement(i)"></app-transportation-data><br>
+
+</div>
 
 </ion-content>
