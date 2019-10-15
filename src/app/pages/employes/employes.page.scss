@@ -1,0 +1,10 @@
+.emplyItem{border-left: 6px solid #5855b1;
+    background-color: lightgrey;
+    }
+    ion-tab-bar.my-custom-tab-bar {
+        --background: rgba(100,100,100,0.1);
+      }
+      ion-tab-bar.my-custom-tab-bar ion-tab-button {
+        --background: transparent;
+      }
+      

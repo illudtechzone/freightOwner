@@ -7,12 +7,10 @@
   <ion-content padding>
   
     <ion-grid margin-top>
-        <ion-row justify-content-center>
-            <ion-avatar class="profilepicsize">
-              <ion-icon name="person" class="profileIcon"></ion-icon>
-            </ion-avatar>
-        </ion-row>
       <ion-row justify-content-center>
+        <img src="/assets/freight.png" class="signupLogo">
+    </ion-row>
+    <ion-row>
         <ion-col text-center>
           
           <ion-item class="item-inner">
@@ -35,13 +33,34 @@
             <ion-label color="medium" position="floating">confirm</ion-label>
             <ion-input [(ngModel)]="confirm" type="password" background="light"></ion-input>
           </ion-item> 
+        </ion-col>
+      </ion-row>
+      <br>
+      <br>
+      <ion-row>
+  
+        <ion-col>
+          <ion-button color="tertiary" (click)="login()" expand="block">
+            Login
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="tertiary" (click)="signup()" expand="block">
+            SignUp
+          </ion-button>
+        </ion-col>
+      </ion-row>
+          <!-- <ion-item class="item-inner">
+            <ion-label color="medium" position="floating">confirm</ion-label>
+            <ion-input [(ngModel)]="confirm" type="password" background="light"></ion-input>
+          </ion-item> 
           <ion-button color="tertiary" (click)="signup()"  expand="block" margin-top margin-bottom>Register</ion-button>
         </ion-col>
       </ion-row>
       <ion-col text-center>
         <ion-text>Do have an Account? </ion-text>
         <ion-text routerLink="/login" class="cursor">login</ion-text>
-      </ion-col>
+      </ion-col> -->
     </ion-grid>
   </ion-content>
   
