@@ -7,13 +7,28 @@
       Home
     </ion-title>
   </ion-toolbar>
+  <ion-segment>
+    <ion-segment-button value="requests" (ionSelect)="segmentButtonClicked($event)" checked>
+      <ion-label class="ion-text-wrap">requested</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="accepted" (ionSelect)="segmentButtonClicked($event)">
+      <ion-label class="ion-text-wrap">qouted</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="fixed" (ionSelect)="segmentButtonClicked($event)">
+      <ion-label class="ion-text-wrap">fixed</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 <ion-content>
+    
   <div *ngFor="let freight of freights; let i=index">
 
+  <div  >
   <app-transportation-data [freight]="freight" (elementDeleted)="deleteElement(i)"></app-transportation-data><br>
-
+  </div>
 </div>
+
+
 
 </ion-content>

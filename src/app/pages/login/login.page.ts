@@ -78,6 +78,9 @@ export class LoginPage implements OnInit {
   validatePassword() {
     return (!(this.password === ''));
   }
+  signup(){
+    this.navCtrl.navigateForward('/signup');
 
+  }
 
 }

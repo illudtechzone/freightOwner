@@ -22,11 +22,11 @@ export class AppComponent {
       url: '/vehicle-list',
       icon: 'bus'
     },
-    // {
-    //   title: 'Employes',
-    //   url: '/employes',
-    //   icon: 'people'
-    // },
+    {
+      title: 'Employes',
+      url: '/employes',
+      icon: 'people'
+    },
     // {
     //   title: 'Bookings',
     //   url: '/booking-list',
@@ -73,7 +73,7 @@ export class AppComponent {
 // let status bar overlay webview
 this.statusBar.styleDefault();
 // set status bar to white
-this.statusBar.backgroundColorByHexString('#e6e6e6');
+this.statusBar.backgroundColorByHexString('#5432c1');
 this.splashScreen.hide();
     });
   }

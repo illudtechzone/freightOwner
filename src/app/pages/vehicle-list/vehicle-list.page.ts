@@ -4,7 +4,7 @@ import { CommonService } from './../../services/common.service';
 import { Vehicle } from './../../dtos/vehicle';
 import { AddVehicleComponent } from './../../components/add-vehicle/add-vehicle.component';
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, ActionSheetController } from '@ionic/angular';
 import { CompanyDTO } from 'src/app/api/models';
 import { QueryResourceService, CommandResourceService } from 'src/app/api/services';
 
@@ -20,7 +20,8 @@ export class VehicleListPage implements OnInit {
     private commonService: CommonService,
     private commandResourceService: CommandResourceService,
     private utilService: UtilService,
-    private toastController: ToastController) { }
+    private toastController: ToastController,
+    private actionSheetController:ActionSheetController) { }
   vehicles: VehicleDTO[] = [];
   company: CompanyDTO = {};
   ngOnInit() {
@@ -78,7 +79,7 @@ export class VehicleListPage implements OnInit {
     return await modal.present();
   }
 
-  async presentEditModal(vehicle: Vehicle) {
+  async presentEditModal(vehicle: VehicleDTO) {
     // this.queryResource.f
     const modal = await this.modalController.create({
       component: AddVehicleComponent,
@@ -105,6 +106,33 @@ export class VehicleListPage implements OnInit {
 
       });
 
+  }
+  async presentActionSheet(vehicle: VehicleDTO) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Options',
+      buttons: [{
+        text: 'Delete',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+        this.deleteVehicle(vehicle);
+        }
+      },  {
+        text: 'Edit',
+        icon: 'create',
+        handler: () => {
+          this.presentEditModal(vehicle);
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
 

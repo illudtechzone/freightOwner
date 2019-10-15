@@ -10,10 +10,25 @@
 </ion-header>
 
 <ion-content>
-
+  <div *ngFor="let vehicle of vehicles">
+      <ion-card>
+          <ion-item lines="none">
+              <ion-text>{{vehicle.registerNo}}</ion-text>
+               <ion-icon name="more" slot="end"  (click)="presentActionSheet(vehicle)"></ion-icon>
+          </ion-item>
+     
+        
+  <ion-card-content>
+  <ion-text>TATA PICKUP</ion-text>
+  </ion-card-content>
+  
+            
+            
+      </ion-card>
+    </div>
     <!-- <ion-card color="primary"  [routerLink]="['/vehicle-detail']"> -->
   
-    
+<!--     
     <ion-item-sliding  *ngFor="let vehicle of vehicles">
       <ion-card >
       <ion-item-options side="start">
@@ -31,9 +46,7 @@
           </p>
         </ion-label>
        
-        <!-- <ion-avatar>
-          <img src="assets/icon/truckTicon.png">
-        </ion-avatar> -->
+        
         <ion-icon name="bus" slot="end"></ion-icon>
       </ion-item>
     
@@ -44,7 +57,7 @@
         </ion-item-option>
       </ion-item-options>
       </ion-card>
-    </ion-item-sliding>
+    </ion-item-sliding> -->
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="tertiary" (click)="presentModal()">

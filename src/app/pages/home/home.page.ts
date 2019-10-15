@@ -1,3 +1,4 @@
+import { UtilService } from 'src/app/services/util.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FreightView } from 'src/app/dtos/freight-view';
 import { CommandResourceService, QueryResourceService } from 'src/app/api/services';
@@ -10,29 +11,44 @@ import { JhiWebSocketService } from 'src/app/services/jhi-web-socket.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit  {
-
+export class HomePage implements OnInit {
+  segmentName: string = "requests";
   freights: FreightDTO[];
-  constructor(private commandService: CommandResourceService, private queryService: QueryResourceService,
-              private ownerService: OwnerService,private notification: JhiWebSocketService) {
+  constructor(private utilService:UtilService,private commandService: CommandResourceService, private queryService: QueryResourceService,
+    private ownerService: OwnerService, private notification: JhiWebSocketService) {
 
   }
- async ngOnInit() {
-const sample = await this.ownerService.getOwner();
-console.log('INit Method working ' + sample.id);
-
-const params: QueryResourceService.FindAllFreightsUsingGETParams = {requestedStatus: 'REQUEST'};
-this.queryService.findAllFreightsUsingGET(params).subscribe(data => {
+  async ngOnInit() {
   
-  this.freights=data;
+    const sample = await this.ownerService.getOwner();
+    console.log('INit Method working ' + sample.id);
+    this.utilService.createLoader()
+    .then(loader => {
+      loader.present();
+    const params: QueryResourceService.FindAllFreightsUsingGETParams = { requestedStatus: 'REQUEST' };
+    this.queryService.findAllFreightsUsingGET(params).subscribe(data => {
+      loader.dismiss();
+      this.freights = data;
+    },err=>{
+      loader.dismiss();
+
+    });
   });
 
-console.log('Ng on init working');
+    console.log('Ng on init working');
 
+  
+}
+  deleteElement(index) {
+    console.log("Index Value" + index);
   }
-  deleteElement(index)
-  {
-    console.log("Index Value"+index);
+
+
+  segmentButtonClicked(evnt) {
+
+    console.log('evnt is ', evnt.target.value);
+    this.segmentName = evnt.target.value;
+
   }
 
 }

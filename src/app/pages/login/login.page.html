@@ -1,16 +1,15 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>Freight Login</ion-title>
+    <ion-title> Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid margin-top>
     <ion-row justify-content-center>
-      <ion-avatar>
-      
-        <ion-icon name="business" class="profileIcon"></ion-icon>
-      </ion-avatar>
+
+
+        <img src="/assets/freight.png" class="loginLogo">
     </ion-row>
     <ion-row justify-content-center>
       <ion-col text-center>
@@ -22,16 +21,25 @@
           <ion-label color="medium" position="floating">Password</ion-label>
           <ion-input [(ngModel)]="password" type="password"></ion-input>
         </ion-item>
-        <ion-button color="tertiary" (click)="login()" expand="block" margin-top margin-bottom
-          >Login
+      </ion-col>
+    </ion-row>
+    <br>
+    <br>
+    <ion-row>
+
+      <ion-col>
+        <ion-button color="tertiary" (click)="login()" expand="block">
+          Login
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="tertiary" (click)="signup()" expand="block">
+          SignUp
         </ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <ion-text>Dont have an Account? </ion-text>
-        <ion-text routerLink="/signup" color="primary">Register</ion-text>
-      </ion-col>
-    </ion-row>
+
+
+
   </ion-grid>
 </ion-content>
