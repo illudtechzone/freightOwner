@@ -8,10 +8,10 @@
     </ion-title>
   </ion-toolbar>
   <ion-segment>
-    <ion-segment-button value="requests" (ionSelect)="segmentButtonClicked($event)" checked>
-      <ion-label class="ion-text-wrap">requested</ion-label>
+    <ion-segment-button value="all" (ionSelect)="segmentButtonClicked($event)" checked>
+      <ion-label class="ion-text-wrap">all Requests</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="accepted" (ionSelect)="segmentButtonClicked($event)">
+    <ion-segment-button value="quote" (ionSelect)="segmentButtonClicked($event)">
       <ion-label class="ion-text-wrap">qouted</ion-label>
     </ion-segment-button>
     <ion-segment-button value="fixed" (ionSelect)="segmentButtonClicked($event)">
@@ -21,14 +21,27 @@
 </ion-header>
 
 <ion-content>
-    
-  <div *ngFor="let freight of freights; let i=index">
+    <div *ngIf="segmentName==='all'">
+  <div  *ngFor="let freight of freights; let i=index">
 
-  <div  >
+
   <app-transportation-data [freight]="freight" (elementDeleted)="deleteElement(i)"></app-transportation-data><br>
   </div>
 </div>
+<div *ngIf="segmentName==='quote'">
+  <div  *ngFor="let q of quotations|async">
+
+<app-quoted-data [quotation]="q"></app-quoted-data>
+
+ 
+  </div>
+</div>
+<div *ngIf="segmentName==='fixed'">
+  <div  *ngFor="let freight of fixedFreights|async">
 
 
+  <app-transportation-data [freight]="freight" (elementDeleted)="deleteElement(i)"></app-transportation-data><br>
+  </div>
 
+</div>
 </ion-content>

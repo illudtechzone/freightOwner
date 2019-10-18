@@ -15,6 +15,8 @@ export class TransportationDataComponent implements OnInit {
   freightView: FreightView = {freight: {}, isMoreInfo: false, isEdit: false};
   @Input('freight')
   freight: FreightDTO;
+  @Input('quotation')
+  q: Quotation;
   @Output()
   elementDeleted: EventEmitter<any> = new EventEmitter();
   customer: Observable<Customer> ;
@@ -30,21 +32,37 @@ export class TransportationDataComponent implements OnInit {
 
  async ngOnInit() {
     this.companyDto = await this.ownerService.getOwner();
-    console.log('is more info', this.freight);
-    this.freightView.freight = this.freight;
-    this.customer = this.queryResource.findCustomerByIdUsingGET(this.freightView.freight.customerId);
-    console.log(this.companyDto.id + 'freight Id  ' + this.freight.id);
-    const params:
-    QueryResourceService.FindAllQuotationsByCompanyIdAndFreightIdUsingGETParams = {freightId: this.freight.id, companyId: this.companyDto.id};
-    // tslint:disable-next-line:max-line-length
-    this.quotationObservable = this.queryResource.findAllQuotationsByCompanyIdAndFreightIdUsingGET(params);
-    this.quotationObservable.subscribe
-    (data => {
-      console.log('Quatation List  :: ' + data.length);
-      this.quoatationList = data; });
-
+    if(this.freight!=null){
+   this.getFreight();
+    }else
+    {
+      console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+      
+      this.queryResource.findFreightIdUsingGET(this.q.freightId).toPromise().then(
+        data=>{
+         this.freight=data;
+         this.getFreight(); 
+        });
+      
+    }
 
   }
+getFreight()
+{
+  console.log('is more info', this.freight);
+  this.freightView.freight = this.freight;
+  this.customer = this.queryResource.findCustomerByIdUsingGET(this.freightView.freight.customerId);
+  console.log(this.companyDto.id + 'freight Id  ' + this.freight.id);
+  const params:
+  QueryResourceService.FindAllQuotationsByCompanyIdAndFreightIdUsingGETParams = {freightId: this.freight.id, companyId: this.companyDto.id};
+  // tslint:disable-next-line:max-line-length
+  console.log("freight id "+this.freight.id+"  company Id"+this.companyDto.id);
+  this.quotationObservable = this.queryResource.findAllQuotationsByCompanyIdAndFreightIdUsingGET(params);
+  this.quotationObservable.subscribe
+  (data => {
+    console.log('Quatation List  :: ' + data.length);
+    this.quoatationList = data; });
+}
 
   moreInfo() {
     console.log('is more info', this.freightView);
