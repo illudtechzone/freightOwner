@@ -1,19 +1,21 @@
+import { AddEmployeComponent } from './add-employe/add-employe.component';
 import { IonicModule } from '@ionic/angular';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransportationDataComponent } from './transportation-data/transportation-data.component';
 
 
 
 @NgModule({
-  declarations: [AddVehicleComponent,TransportationDataComponent],
+  declarations: [AddVehicleComponent,TransportationDataComponent,AddEmployeComponent],
   imports: [
     CommonModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  exports: [AddVehicleComponent,TransportationDataComponent]
+  exports: [AddVehicleComponent,TransportationDataComponent,AddEmployeComponent]
 })
 export class SharedModule { }

@@ -15,11 +15,12 @@ import { UtilService } from './services/util.service';
 import { KeycloakAdminConfig } from './configs/keycloak.admin.config';
 import { IonicStorageModule } from '@ionic/storage';
 import { ConfigsModule } from './configs/configs.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,ReactiveFormsModule,
     OAuthModule.forRoot(),
     IonicStorageModule.forRoot({
       name: '__mydb',

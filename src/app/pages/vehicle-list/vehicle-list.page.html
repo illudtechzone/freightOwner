@@ -11,24 +11,36 @@
 
 <ion-content>
   <div *ngFor="let vehicle of vehicles">
-      <ion-card>
-          <ion-item lines="none">
-              <ion-text>{{vehicle.registerNo}}</ion-text>
-               <ion-icon name="more" slot="end"  (click)="presentActionSheet(vehicle)"></ion-icon>
-          </ion-item>
-     
-        
-  <ion-card-content>
-  <ion-text>TATA PICKUP</ion-text>
-  </ion-card-content>
-  
-            
-            
-      </ion-card>
-    </div>
-    <!-- <ion-card color="primary"  [routerLink]="['/vehicle-detail']"> -->
-  
-<!--     
+    <ion-card  >
+      <ion-item lines="none">
+        <ion-text>{{vehicle.registerNo}}</ion-text>
+        <ion-icon name="more" slot="end" (click)="presentActionSheet(vehicle)"></ion-icon>
+      </ion-item>
+
+
+      <ion-card-content >
+        <ion-text >TATA PICKUP</ion-text>
+      </ion-card-content>
+
+
+
+    </ion-card>
+  </div>
+  <ion-card >
+    <ion-item lines="none"  >
+      <ion-text>KL 09 PK 0909</ion-text>
+      <ion-icon name="more" slot="end" (click)="presentActionSheet(vehicle)"></ion-icon>
+    </ion-item >
+      <ion-item> 
+        <ion-card-subtitle>TATA pickup</ion-card-subtitle>
+      </ion-item>
+
+
+
+  </ion-card>
+  <!-- <ion-card color="primary"  [routerLink]="['/vehicle-detail']"> -->
+
+  <!--     
     <ion-item-sliding  *ngFor="let vehicle of vehicles">
       <ion-card >
       <ion-item-options side="start">
@@ -61,8 +73,8 @@
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="tertiary" (click)="presentModal()">
-      <ion-icon  name="add"></ion-icon>
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  
+
 </ion-content>

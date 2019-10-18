@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{headerName}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-row justify-content-center>
+      <ion-avatar>
+        <img src="https://png.pngtree.com/svg/20161113/man_1074208.png">
+      </ion-avatar>
+    </ion-row>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Phone</ion-label>
+        <ion-input type="number"></ion-input>
+      </ion-item>
+      <ion-card-header>
+        <ion-card-title text-center>
+          Documents
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-item class="item-inner">
+        <ion-label color="medium" position="floating">Document name</ion-label>
+        <ion-input background="light"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-text slot="start" position="floating"> Valid from </ion-text>
+        <ion-datetime slot="end" displayFormat="MM/DD/YYYY" min="1994-03-14" max="2030-12-09"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-text slot="start" position="floating"> Valid to</ion-text>
+        <ion-datetime slot="end" displayFormat="MM/DD/YYYY" min="1994-03-14" max="2030-12-09"></ion-datetime>
+      </ion-item>
+      <br>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

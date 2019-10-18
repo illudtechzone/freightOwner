@@ -3,73 +3,75 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-segment>
-        <ion-segment-button checked>
-          <ion-label>Drivers</ion-label>
-        </ion-segment-button>
-        <ion-segment-button>
-          <ion-label>Cleaners</ion-label>
-        </ion-segment-button>
-      
-      </ion-segment>
-      
+ 
+      <ion-title>Employes</ion-title>
+      <!-- <ion-searchbar showCancelButton="always"></ion-searchbar> -->
+
+    
   </ion-toolbar>
+  <!-- <ion-segment>
+    <ion-segment-button checked>
+      <ion-label>Drivers</ion-label>
+    </ion-segment-button>
+    <ion-segment-button>
+      <ion-label>Cleaners</ion-label>
+    </ion-segment-button>
+  
+  </ion-segment> -->
 </ion-header>
+
 <ion-content style>
   <br>
-    <ion-item (click)="testClick()" lines="none">
+    <ion-item (click)="testClick()" lines="full">
+        <ion-avatar slot="start">
+            <img src="https://png.pngtree.com/svg/20161113/man_1074208.png">
+        </ion-avatar>
+        <ion-text>
+          jhon cooper
+        </ion-text>
+        <ion-icon name="more" slot="end"  (click)="presentActionSheet()"></ion-icon>
+    </ion-item>
+    <br>
+    <ion-item (click)="testClick()" lines="full">
         <ion-avatar slot="start">
           <img src="http://1.bp.blogspot.com/-pZr1TWJ3l0g/UXCz2PkZbyI/AAAAAAAAGes/WAG3S8CGkdI/s1600/Manu+Bennett-1.jpg">
         </ion-avatar>
-        <ion-label>
-          jhon copper
-        </ion-label>
+        <ion-text>
+          jhon cooper
+        </ion-text>
+        <ion-icon name="more" slot="end"  (click)="presentActionSheet()"></ion-icon>
     </ion-item>
 
     <br>
-    <ion-item (click)="testClick()" lines="none">
+    <ion-item (click)="testClick()" lines="full">
         <ion-avatar slot="start">
           <img src="http://1.bp.blogspot.com/-pZr1TWJ3l0g/UXCz2PkZbyI/AAAAAAAAGes/WAG3S8CGkdI/s1600/Manu+Bennett-1.jpg">
         </ion-avatar>
-        <ion-label>
-          jhon copper
-        </ion-label>
+        <ion-text>
+          jhon cooper
+        </ion-text>
+        <ion-icon name="more" slot="end"  (click)="presentActionSheet()"></ion-icon>
     </ion-item>
+
     <br>
-    <ion-item (click)="testClick()" lines="none">
+    <ion-item (click)="testClick()" lines="full">
         <ion-avatar slot="start">
           <img src="http://1.bp.blogspot.com/-pZr1TWJ3l0g/UXCz2PkZbyI/AAAAAAAAGes/WAG3S8CGkdI/s1600/Manu+Bennett-1.jpg">
         </ion-avatar>
-        <ion-label>
-          jhon copper
-        </ion-label>
+        <ion-text>
+          jhon cooper
+        </ion-text>
+        <ion-icon name="more" slot="end"  (click)="presentActionSheet()"></ion-icon>
     </ion-item>
-    <br>
-    <ion-item (click)="testClick()" lines="none">
-        <ion-avatar slot="start">
-          <img src="http://1.bp.blogspot.com/-pZr1TWJ3l0g/UXCz2PkZbyI/AAAAAAAAGes/WAG3S8CGkdI/s1600/Manu+Bennett-1.jpg">
-        </ion-avatar>
-        <ion-label>
-          jhon copper
-        </ion-label>
-    </ion-item>
-    <br>
-    <ion-item (click)="testClick()" lines="none">
-        <ion-avatar slot="start">
-          <img src="http://1.bp.blogspot.com/-pZr1TWJ3l0g/UXCz2PkZbyI/AAAAAAAAGes/WAG3S8CGkdI/s1600/Manu+Bennett-1.jpg">
-        </ion-avatar>
-        <ion-label>
-          jhon copper
-        </ion-label>
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-            <ion-fab-button color="tertiary" (click)="presentModal()">
-              <ion-icon  name="add"></ion-icon>
-            </ion-fab-button>
-          </ion-fab>
-    </ion-item>
-  
-  
+
+    
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="tertiary" (click)="presentModal()">
+        <ion-icon  name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
      
+    
                      
 
 </ion-content>

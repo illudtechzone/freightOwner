@@ -12,8 +12,12 @@
 </ion-header>
 <ion-content>
   <ion-card>
-
-    <ion-item class="item-inner">
+      <ion-row justify-content-center>
+          <ion-avatar>
+              <img src="http://www.free-icons-download.net/images/truck-icon-64378.png">
+            </ion-avatar>    </ion-row>
+    <ion-card-content>
+    <ion-item >
       <ion-label color="medium" position="floating" >Regnumber </ion-label>
       <ion-input background="light" [(ngModel)]="vehicle.registerNo"></ion-input>
     </ion-item>
@@ -27,18 +31,15 @@
         <ion-select-option value="CARGO">CARGO</ion-select-option>
       </ion-select>
     </ion-item> -->
-
-  </ion-card>
-  <ion-card>
-  <ion-card-header>
-    <ion-card-title text-center>
+  <ion-item lines='full'>    <ion-label text-center>
       Specifications
-    </ion-card-title>
-  </ion-card-header>
-  <ion-item class="item-inner">
+    </ion-label>
+  </ion-item>
+
+   <ion-item class="item-inner">
 
     <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.maxWeight" placeholder="Max weigh"></ion-input>
-    <ion-text slot="end">Kg</ion-text>
+    <ion-text slot="end">Ton</ion-text>
   </ion-item>
   <ion-item class="item-inner">
     <ion-input background="light" [(ngModel)]="vehicleLookUpDTO.height" placeholder="Height"></ion-input>
@@ -50,9 +51,9 @@
     <ion-text slot="end">Feet</ion-text>
 
   </ion-item>
-  <ion-item>
 
-  </ion-item>
+</ion-card-content>
+
 </ion-card>
 <ion-card *ngIf="headerName==='Add Vehicle'" >
   <ion-card-header>
