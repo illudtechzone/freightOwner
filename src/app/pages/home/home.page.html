@@ -8,10 +8,10 @@
     </ion-title>
   </ion-toolbar>
   <ion-segment>
-    <ion-segment-button value="requests" (ionSelect)="segmentButtonClicked($event)" checked>
-      <ion-label class="ion-text-wrap">requested</ion-label>
+    <ion-segment-button value="all" (ionSelect)="segmentButtonClicked($event)" checked>
+      <ion-label class="ion-text-wrap">all Requests</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="accepted" (ionSelect)="segmentButtonClicked($event)">
+    <ion-segment-button value="quote" (ionSelect)="segmentButtonClicked($event)">
       <ion-label class="ion-text-wrap">qouted</ion-label>
     </ion-segment-button>
     <ion-segment-button value="fixed" (ionSelect)="segmentButtonClicked($event)">
@@ -21,14 +21,38 @@
 </ion-header>
 
 <ion-content>
-    
-  <div *ngFor="let freight of freights; let i=index">
+    <div *ngIf="segmentName==='all'">
+  <div  *ngFor="let freight of freights; let i=index">
 
-  <div  >
+    <ion-card style="-webkit-box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);
+    -moz-box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);
+    box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);">
   <app-transportation-data [freight]="freight" (elementDeleted)="deleteElement(i)"></app-transportation-data><br>
+    </ion-card>  
+</div>
+</div>
+<div *ngIf="segmentName==='quote'">
+  <div  *ngFor="let q of quotations|async">
+
+<app-quoted-data [quotation]="q"></app-quoted-data>
+
+ 
   </div>
 </div>
+<div *ngIf="segmentName==='fixed'">
+  <div  *ngFor="let freight of fixedFreights|async">
+ <ion-card style="-webkit-box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);
+    -moz-box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);
+    box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);">
+  <app-transportation-data [freight]="freight" (elementDeleted)="deleteElement(i)"></app-transportation-data><br>
+  <ion-item >
+    <ion-label>Choose x Vehicle</ion-label>
+  <ion-button  (click)="presentModal()">
+    <ion-icon slot="end" name="add-circle"></ion-icon> 
+  </ion-button>
+   </ion-item>
+</ion-card>  
+</div>
 
-
-
+</div>
 </ion-content>
