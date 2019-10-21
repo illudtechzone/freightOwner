@@ -1,3 +1,30 @@
-<p>
-  choose-vehicle works!
-</p>
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+     Choose Vehicle
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div *ngFor="let vehicle of vehicles">
+  <ion-card  >
+    <ion-item lines="none">
+      <ion-text>{{vehicle.registerNo}}</ion-text>
+      <ion-button slot="end" (click)="select(vehicle.id)">choose</ion-button>
+    </ion-item>
+
+
+    <ion-card-content >
+      <ion-text >TATA PICKUP</ion-text>
+    </ion-card-content>
+
+
+
+  </ion-card>
+</div>
+</ion-content>

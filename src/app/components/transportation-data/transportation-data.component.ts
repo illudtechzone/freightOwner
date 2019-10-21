@@ -71,6 +71,9 @@ getFreight()
 
   }
    sendQuotation() {
+    this.utilService.createLoader()
+    .then(loader => {
+      loader.present();
      console.log('Send Quotation' + this.quotation.amount);
      this.quotation.freightId = this.freightView.freight.id;
      this.quotation.deliveryDate = this.freightView.freight.deliveryDate;
@@ -78,16 +81,23 @@ getFreight()
      if (this.quotation.amount) {
        this.commandResource.createQuotationUsingPOST(this.quotation).toPromise().then(x => {
          console.log('QUATATION sEND : ' + x);
+         loader.dismiss();
          this.quotationObservable.subscribe(data => {
             console.log('Quatation List @@@@@@@@@@@@@  :: ' + data.length);
             this.quoatationList = data;
+          
           });
+        },err=>{
+
+          loader.dismiss();
         }
         );
 
     } else {
+      loader.dismiss();
       this.utilService.createToast('Please Enter your Budget');
     }
+  });
   }
   deleteElement() {
     this.elementDeleted.emit();

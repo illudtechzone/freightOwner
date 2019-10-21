@@ -42,6 +42,7 @@ class CommandResourceService extends __BaseService {
   static readonly updateFreightUsingPUTPath = '/api/command/update/freight';
   static readonly updateVehicleUsingPUTPath = '/api/command/update/vehicle';
   static readonly updateVehicleLookUpUsingPUTPath = '/api/command/update/vehiclelookup';
+  static readonly assignVehicleUsingPOSTPath = '/api/command/updateFreight/{vehicleId}';
 
   constructor(
     config: __Configuration,
@@ -754,6 +755,53 @@ class CommandResourceService extends __BaseService {
       __map(_r => _r.body as VehicleLookUpDTO)
     );
   }
+
+  /**
+   * @param params The `CommandResourceService.AssignVehicleUsingPOSTParams` containing the following parameters:
+   *
+   * - `vehicleId`: vehicleId
+   *
+   * - `freightDTO`: freightDTO
+   *
+   * @return OK
+   */
+  assignVehicleUsingPOSTResponse(params: CommandResourceService.AssignVehicleUsingPOSTParams): __Observable<__StrictHttpResponse<FreightDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.freightDTO;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/command/updateFreight/${params.vehicleId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<FreightDTO>;
+      })
+    );
+  }
+  /**
+   * @param params The `CommandResourceService.AssignVehicleUsingPOSTParams` containing the following parameters:
+   *
+   * - `vehicleId`: vehicleId
+   *
+   * - `freightDTO`: freightDTO
+   *
+   * @return OK
+   */
+  assignVehicleUsingPOST(params: CommandResourceService.AssignVehicleUsingPOSTParams): __Observable<FreightDTO> {
+    return this.assignVehicleUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as FreightDTO)
+    );
+  }
 }
 
 module CommandResourceService {
@@ -804,6 +852,22 @@ module CommandResourceService {
      * response
      */
     response: QuotationDTO;
+  }
+
+  /**
+   * Parameters for assignVehicleUsingPOST
+   */
+  export interface AssignVehicleUsingPOSTParams {
+
+    /**
+     * vehicleId
+     */
+    vehicleId: number;
+
+    /**
+     * freightDTO
+     */
+    freightDTO: FreightDTO;
   }
 }
 

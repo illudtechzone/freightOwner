@@ -29,6 +29,7 @@ class QueryResourceService extends __BaseService {
   static readonly findFreightIdUsingGETPath = '/api/findFreightbyId/{id}';
   static readonly findVehicleLookUpByIdUsingGETPath = '/api/findVehiclelookupId/{id}';
   static readonly findAllFreightsByCustomerIdUsingGETPath = '/api/freights/{customerId}';
+  static readonly findAllDriversByCompanyIdpCodeUsingGETPath = '/api/getAllDriversbyCompanyidpcode/{companyIdpcode}';
   static readonly findAllFreightsUsingGETPath = '/api/getAllFreight/{requestedStatus}';
   static readonly findAllFreightsUsingGET1Path = '/api/getAllFreightByCompanyIdAndStatus/{companyId}/{requestedStatus}';
   static readonly findAllQuotationsUsingGETPath = '/api/getAllQuotations/{freightId}';
@@ -283,6 +284,63 @@ class QueryResourceService extends __BaseService {
   findAllFreightsByCustomerIdUsingGET(params: QueryResourceService.FindAllFreightsByCustomerIdUsingGETParams): __Observable<Array<FreightDTO>> {
     return this.findAllFreightsByCustomerIdUsingGETResponse(params).pipe(
       __map(_r => _r.body as Array<FreightDTO>)
+    );
+  }
+
+  /**
+   * @param params The `QueryResourceService.FindAllDriversByCompanyIdpCodeUsingGETParams` containing the following parameters:
+   *
+   * - `companyIdpCode`: companyIdpCode
+   *
+   * - `sort`: Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+   *
+   * - `size`: Size of a page
+   *
+   * - `page`: Page number of the requested page
+   *
+   * @return OK
+   */
+  findAllDriversByCompanyIdpCodeUsingGETResponse(params: QueryResourceService.FindAllDriversByCompanyIdpCodeUsingGETParams): __Observable<__StrictHttpResponse<Array<Driver>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    (params.sort || []).forEach(val => {if (val != null) __params = __params.append('sort', val.toString())});
+    if (params.size != null) __params = __params.set('size', params.size.toString());
+    if (params.page != null) __params = __params.set('page', params.page.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/api/getAllDriversbyCompanyidpcode/${params.companyIdpCode}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Array<Driver>>;
+      })
+    );
+  }
+  /**
+   * @param params The `QueryResourceService.FindAllDriversByCompanyIdpCodeUsingGETParams` containing the following parameters:
+   *
+   * - `companyIdpCode`: companyIdpCode
+   *
+   * - `sort`: Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+   *
+   * - `size`: Size of a page
+   *
+   * - `page`: Page number of the requested page
+   *
+   * @return OK
+   */
+  findAllDriversByCompanyIdpCodeUsingGET(params: QueryResourceService.FindAllDriversByCompanyIdpCodeUsingGETParams): __Observable<Array<Driver>> {
+    return this.findAllDriversByCompanyIdpCodeUsingGETResponse(params).pipe(
+      __map(_r => _r.body as Array<Driver>)
     );
   }
 
@@ -1148,6 +1206,32 @@ module QueryResourceService {
      * customerId
      */
     customerId: number;
+
+    /**
+     * Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+     */
+    sort?: Array<string>;
+
+    /**
+     * Size of a page
+     */
+    size?: number;
+
+    /**
+     * Page number of the requested page
+     */
+    page?: number;
+  }
+
+  /**
+   * Parameters for findAllDriversByCompanyIdpCodeUsingGET
+   */
+  export interface FindAllDriversByCompanyIdpCodeUsingGETParams {
+
+    /**
+     * companyIdpCode
+     */
+    companyIdpCode: string;
 
     /**
      * Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.

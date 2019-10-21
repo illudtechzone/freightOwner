@@ -1,3 +1,4 @@
+import { Vehicle } from './../../api/models/vehicle';
 import { ChooseVehicleComponent } from './../../components/choose-vehicle/choose-vehicle.component';
 import { UtilService } from 'src/app/services/util.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -64,18 +65,31 @@ export class HomePage implements OnInit {
     this.segmentName = evnt.target.value;
 
   } 
-
-  async presentModal() {
-    console.log(' modal sbfggfgfoiwef');
-
+  async presentModal(freight) {
     const modal = await this.modalController.create({
       component: ChooseVehicleComponent,
       componentProps: {
         'headerName': 'Add Employe',
-        
+        'freight':freight,
       }
     });
 
+    modal.onDidDismiss().then((data: any) => {
+       console.log('[]<>[]', data.data.freight);
+        if (data.data.freight.VehicleId !=null)
 
+        this.freights.forEach(res=>{
+          if(res.id=freight.id){
+            freight.vehicleId=data.data.freight.vehicleId;
+
+          }
+
+        })
+
+
+     });
+    return await modal.present();
   }
+
+  
 }

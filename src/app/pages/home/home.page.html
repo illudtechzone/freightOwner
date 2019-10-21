@@ -24,11 +24,8 @@
     <div *ngIf="segmentName==='all'">
   <div  *ngFor="let freight of freights; let i=index">
 
-    <ion-card style="-webkit-box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);
-    -moz-box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);
-    box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);">
+    
   <app-transportation-data [freight]="freight" (elementDeleted)="deleteElement(i)"></app-transportation-data><br>
-    </ion-card>  
 </div>
 </div>
 <div *ngIf="segmentName==='quote'">
@@ -41,17 +38,22 @@
 </div>
 <div *ngIf="segmentName==='fixed'">
   <div  *ngFor="let freight of fixedFreights|async">
- <ion-card style="-webkit-box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);
-    -moz-box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);
-    box-shadow: 0px 0px 56px -9px rgba(0,0,0,0.73);">
-  <app-transportation-data [freight]="freight" (elementDeleted)="deleteElement(i)"></app-transportation-data><br>
-  <ion-item >
-    <ion-label>Choose x Vehicle</ion-label>
-  <ion-button  (click)="presentModal()">
-    <ion-icon slot="end" name="add-circle"></ion-icon> 
-  </ion-button>
+    <ion-card style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<ion-item  (click)="presentModal(freight)" *ngIf="freight.vehicleId===null">
+    <ion-label>Choose Vehicle</ion-label>
+  
+    <ion-icon slot="end" name="bus"></ion-icon> 
+
    </ion-item>
-</ion-card>  
+   <!-- <ion-item  (click)="presentModal()" *ngIf="freight.vehicleId===null" >
+    <ion-label>KL 90 PK 9090</ion-label>
+  
+    <ion-icon slot="end" name="bus"></ion-icon> 
+
+   </ion-item> -->
+  </ion-card>
+  <app-transportation-data [freight]="freight" (elementDeleted)="deleteElement(i)"></app-transportation-data><br>
+
 </div>
 
 </div>

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, ActionSheetController } from '@ionic/angular';
 import { CompanyDTO } from 'src/app/api/models';
 import { QueryResourceService, CommandResourceService } from 'src/app/api/services';
+import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -21,22 +22,16 @@ export class VehicleListPage implements OnInit {
     private commandResourceService: CommandResourceService,
     private utilService: UtilService,
     private toastController: ToastController,
-    private actionSheetController:ActionSheetController) { }
+    private actionSheetController:ActionSheetController,
+    private vehicleService:VehicleService) { }
   vehicles: VehicleDTO[] = [];
   company: CompanyDTO = {};
   ngOnInit() {
     this.utilService.createLoader()
       .then(loader => {
         loader.present();
-        this.commonService.getCompany().then((res: any) => {
-          this.company = res;
-          if (this.company === null) {
-            loader.dismiss();
-            this.utilService.createToast(' oops! our server might be down ');
-            console.log('hoi');
-          }
-          console.log('company got ', res);
-          this.queryResource.findAllvehiclesUsingGET({ companyIdpCode: this.company.companyIdpCode }).subscribe((res1: any) => {
+
+          this.vehicleService.getVehicles().then((res1: any) => {
             console.log('vehicles are ', res1);
             this.vehicles = res1;
             loader.dismiss();
@@ -46,13 +41,7 @@ export class VehicleListPage implements OnInit {
             loader.dismiss();
 
           });
-        }, err => {
-          console.log('company got error ', err);
-          loader.dismiss();
-          this.utilService.createToast(' oops! our server might be down ');
-
-
-        });
+       
 
       });
 
