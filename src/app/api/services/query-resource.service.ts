@@ -29,7 +29,7 @@ class QueryResourceService extends __BaseService {
   static readonly findFreightIdUsingGETPath = '/api/findFreightbyId/{id}';
   static readonly findVehicleLookUpByIdUsingGETPath = '/api/findVehiclelookupId/{id}';
   static readonly findAllFreightsByCustomerIdUsingGETPath = '/api/freights/{customerId}';
-  static readonly findAllDriversByCompanyIdpCodeUsingGETPath = '/api/getAllDriversbyCompanyidpcode/{companyIdpcode}';
+  static readonly findAllDriversByCompanyIdpCodeUsingGETPath = '/api/getAllDriversbyCompanyidpcode/{companyIdpCode}';
   static readonly findAllFreightsUsingGETPath = '/api/getAllFreight/{requestedStatus}';
   static readonly findAllFreightsUsingGET1Path = '/api/getAllFreightByCompanyIdAndStatus/{companyId}/{requestedStatus}';
   static readonly findAllQuotationsUsingGETPath = '/api/getAllQuotations/{freightId}';

@@ -7,6 +7,7 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
+import { DriverDocumentDTO } from '../models/driver-document-dto';
 import { CompanyDTO } from '../models/company-dto';
 import { CustomerDTO } from '../models/customer-dto';
 import { DriverDTO } from '../models/driver-dto';
@@ -23,6 +24,7 @@ import { CustomerStatus } from '../models/customer-status';
   providedIn: 'root',
 })
 class CommandResourceService extends __BaseService {
+  static readonly createDriverDocumnetUsingPOSTPath = '/api/command/create';
   static readonly createCompanyUsingPOSTPath = '/api/command/create/company';
   static readonly createcompanyIfnotExistUsingPOSTPath = '/api/command/create/company/ifnotexist';
   static readonly createCustomerUsingPOSTPath = '/api/command/create/customer';
@@ -35,13 +37,16 @@ class CommandResourceService extends __BaseService {
   static readonly createVehicleLookUpUsingPOSTPath = '/api/command/create/vehiclelookup';
   static readonly customerStatusUsingPOSTPath = '/api/command/customer/status/{taskId}';
   static readonly deleteVehicleUsingDELETEPath = '/api/command/delete/vehicle/{vehicleId}/{vehicleLookupId}';
+  static readonly deleteDriverUsingDELETEPath = '/api/command/deletedriver/{driverId}';
   static readonly sendQuatationUsingPOSTPath = '/api/command/sendQuatation/{taskId}';
+  static readonly updateDriverDocumnetUsingPUTPath = '/api/command/update';
   static readonly updateCompanyUsingPUTPath = '/api/command/update/company';
   static readonly updateCustomerUsingPUTPath = '/api/command/update/customer';
   static readonly updateDriverUsingPUTPath = '/api/command/update/driver';
   static readonly updateFreightUsingPUTPath = '/api/command/update/freight';
   static readonly updateVehicleUsingPUTPath = '/api/command/update/vehicle';
   static readonly updateVehicleLookUpUsingPUTPath = '/api/command/update/vehiclelookup';
+  static readonly deleteDriverDocumnetUsingDELETEPath = '/api/command/update/{driverdocumentId}';
   static readonly assignVehicleUsingPOSTPath = '/api/command/updateFreight/{vehicleId}';
 
   constructor(
@@ -49,6 +54,42 @@ class CommandResourceService extends __BaseService {
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  /**
+   * @param driDocDTO driDocDTO
+   * @return OK
+   */
+  createDriverDocumnetUsingPOSTResponse(driDocDTO: DriverDocumentDTO): __Observable<__StrictHttpResponse<DriverDocumentDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = driDocDTO;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/command/create`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<DriverDocumentDTO>;
+      })
+    );
+  }
+  /**
+   * @param driDocDTO driDocDTO
+   * @return OK
+   */
+  createDriverDocumnetUsingPOST(driDocDTO: DriverDocumentDTO): __Observable<DriverDocumentDTO> {
+    return this.createDriverDocumnetUsingPOSTResponse(driDocDTO).pipe(
+      __map(_r => _r.body as DriverDocumentDTO)
+    );
   }
 
   /**
@@ -498,6 +539,40 @@ class CommandResourceService extends __BaseService {
   }
 
   /**
+   * @param driverId driverId
+   */
+  deleteDriverUsingDELETEResponse(driverId: number): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/api/command/deletedriver/${driverId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param driverId driverId
+   */
+  deleteDriverUsingDELETE(driverId: number): __Observable<null> {
+    return this.deleteDriverUsingDELETEResponse(driverId).pipe(
+      __map(_r => _r.body as null)
+    );
+  }
+
+  /**
    * @param params The `CommandResourceService.SendQuatationUsingPOSTParams` containing the following parameters:
    *
    * - `taskId`: taskId
@@ -537,6 +612,42 @@ class CommandResourceService extends __BaseService {
   sendQuatationUsingPOST(params: CommandResourceService.SendQuatationUsingPOSTParams): __Observable<null> {
     return this.sendQuatationUsingPOSTResponse(params).pipe(
       __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param driDocDTO driDocDTO
+   * @return OK
+   */
+  updateDriverDocumnetUsingPUTResponse(driDocDTO: DriverDocumentDTO): __Observable<__StrictHttpResponse<DriverDocumentDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = driDocDTO;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/api/command/update`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<DriverDocumentDTO>;
+      })
+    );
+  }
+  /**
+   * @param driDocDTO driDocDTO
+   * @return OK
+   */
+  updateDriverDocumnetUsingPUT(driDocDTO: DriverDocumentDTO): __Observable<DriverDocumentDTO> {
+    return this.updateDriverDocumnetUsingPUTResponse(driDocDTO).pipe(
+      __map(_r => _r.body as DriverDocumentDTO)
     );
   }
 
@@ -753,6 +864,40 @@ class CommandResourceService extends __BaseService {
   updateVehicleLookUpUsingPUT(vehicleLookUp: VehicleLookUpDTO): __Observable<VehicleLookUpDTO> {
     return this.updateVehicleLookUpUsingPUTResponse(vehicleLookUp).pipe(
       __map(_r => _r.body as VehicleLookUpDTO)
+    );
+  }
+
+  /**
+   * @param driverdocumentId driverdocumentId
+   */
+  deleteDriverDocumnetUsingDELETEResponse(driverdocumentId: number): __Observable<__StrictHttpResponse<null>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/api/command/update/${driverdocumentId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<null>;
+      })
+    );
+  }
+  /**
+   * @param driverdocumentId driverdocumentId
+   */
+  deleteDriverDocumnetUsingDELETE(driverdocumentId: number): __Observable<null> {
+    return this.deleteDriverDocumnetUsingDELETEResponse(driverdocumentId).pipe(
+      __map(_r => _r.body as null)
     );
   }
 

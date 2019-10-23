@@ -8,6 +8,7 @@ export { DataResponse } from './models/data-response';
 export { Driver } from './models/driver';
 export { DriverDTO } from './models/driver-dto';
 export { DriverDocument } from './models/driver-document';
+export { DriverDocumentDTO } from './models/driver-document-dto';
 export { FreightDTO } from './models/freight-dto';
 export { Quotation } from './models/quotation';
 export { QuotationDTO } from './models/quotation-dto';

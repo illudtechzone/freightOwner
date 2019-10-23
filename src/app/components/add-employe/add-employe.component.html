@@ -20,12 +20,12 @@
 
     <ion-card-content>
       <ion-item>
-        <ion-label position="floating">Name</ion-label>
-        <ion-input></ion-input>
+        <ion-label position="floating"  >Name</ion-label>
+        <ion-input [(ngModel)]="driver.name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Phone</ion-label>
-        <ion-input type="number"></ion-input>
+        <ion-label position="floating"  >Phone</ion-label>
+        <ion-input type="number" [(ngModel)]="driver.phoneNumber" type="number"></ion-input>
       </ion-item>
       <ion-card-header>
         <ion-card-title text-center>
@@ -50,4 +50,12 @@
       <br>
     </ion-card-content>
   </ion-card>
+  <ion-row>
+    <ion-col>
+      <ion-button   color="light" expand="block" (click)="save()">save</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button  color="light" expand="block" (click)="dismiss()">cancel</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

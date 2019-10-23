@@ -21,48 +21,19 @@
 </ion-header>
 
 <ion-content style>
+  <div *ngFor="let driver of drivers" >
   <br>
-    <ion-item (click)="testClick()" lines="full">
+    <ion-item  lines="full">
         <ion-avatar slot="start">
             <img src="https://png.pngtree.com/svg/20161113/man_1074208.png">
         </ion-avatar>
         <ion-text>
-          jhon cooper
+            {{driver.name}}
         </ion-text>
-        <ion-icon name="more" slot="end"  (click)="presentActionSheet()"></ion-icon>
+        <!-- <ion-icon name="more" slot="end"  (click)="presentActionSheet()"></ion-icon> -->
     </ion-item>
     <br>
-    <ion-item (click)="testClick()" lines="full">
-        <ion-avatar slot="start">
-          <img src="http://1.bp.blogspot.com/-pZr1TWJ3l0g/UXCz2PkZbyI/AAAAAAAAGes/WAG3S8CGkdI/s1600/Manu+Bennett-1.jpg">
-        </ion-avatar>
-        <ion-text>
-          jhon cooper
-        </ion-text>
-        <ion-icon name="more" slot="end"  (click)="presentActionSheet()"></ion-icon>
-    </ion-item>
-
-    <br>
-    <ion-item (click)="testClick()" lines="full">
-        <ion-avatar slot="start">
-          <img src="http://1.bp.blogspot.com/-pZr1TWJ3l0g/UXCz2PkZbyI/AAAAAAAAGes/WAG3S8CGkdI/s1600/Manu+Bennett-1.jpg">
-        </ion-avatar>
-        <ion-text>
-          jhon cooper
-        </ion-text>
-        <ion-icon name="more" slot="end"  (click)="presentActionSheet()"></ion-icon>
-    </ion-item>
-
-    <br>
-    <ion-item (click)="testClick()" lines="full">
-        <ion-avatar slot="start">
-          <img src="http://1.bp.blogspot.com/-pZr1TWJ3l0g/UXCz2PkZbyI/AAAAAAAAGes/WAG3S8CGkdI/s1600/Manu+Bennett-1.jpg">
-        </ion-avatar>
-        <ion-text>
-          jhon cooper
-        </ion-text>
-        <ion-icon name="more" slot="end"  (click)="presentActionSheet()"></ion-icon>
-    </ion-item>
+  </div>
 
     
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

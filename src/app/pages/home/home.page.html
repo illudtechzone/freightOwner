@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+     Owner Home
     </ion-title>
   </ion-toolbar>
   <ion-segment>
@@ -21,6 +21,14 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
     <div *ngIf="segmentName==='all'">
   <div  *ngFor="let freight of freights; let i=index">
 

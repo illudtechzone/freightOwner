@@ -30,9 +30,12 @@ const routes: Routes = [
   { path: 'vehicle-detail', loadChildren: './pages/vehicle-detail/vehicle-detail.module#VehicleDetailPageModule',
   canActivate:[AuthGuardService]
 },
-  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule' },
-  { path: 'booking-list', loadChildren: './pages/booking-list/booking-list.module#BookingListPageModule' },
-  { path: 'employes', loadChildren: './pages/employes/employes.module#EmployesPageModule' },
+  { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule',
+  canActivate:[AuthGuardService] },
+  { path: 'booking-list', loadChildren: './pages/booking-list/booking-list.module#BookingListPageModule',
+  canActivate:[AuthGuardService] },
+  { path: 'employes', loadChildren: './pages/employes/employes.module#EmployesPageModule',
+  canActivate:[AuthGuardService] },
 ];
 
 @NgModule({

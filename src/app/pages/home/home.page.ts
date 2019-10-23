@@ -54,8 +54,38 @@ export class HomePage implements OnInit {
 
   
 }
+
+doRefresh(event) {
+  console.log('Begin async operation');
+  this.utilService.createLoader()
+    .then(loader => {
+      loader.present();
+     const fparams: QueryResourceService.FindAllFreightsUsingGET1Params={companyId:this.companyDto.id,requestedStatus:'CONFIRM'};
+     this.fixedFreights= this.queryService.findAllFreightsUsingGET1(fparams);
+      const qparams: QueryResourceService.FindAllQuotationsByCompanyIdUsingGETParams={companyId:this.companyDto.id};
+    this.quotations=this.queryService.findAllQuotationsByCompanyIdUsingGET(qparams);
+    const params: QueryResourceService.FindAllFreightsUsingGETParams = { requestedStatus: 'REQUEST' };
+    this.queryService.findAllFreightsUsingGET(params).subscribe(data => {
+      console.log("working <<<<"+data);
+      loader.dismiss();
+      this.freights = data;
+    },err=>{
+      loader.dismiss();
+
+    });
+  });
+
+  setTimeout(() => {
+    console.log('Async operation has ended');
+    event.target.complete();
+  }, 2000);
+}
+
   deleteElement(index) {
     console.log("Index Value" + index);
+    this.freights.splice(index,1);
+
+
   }
 
 
