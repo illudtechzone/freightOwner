@@ -1,9 +1,12 @@
+import { UtilService } from './../../services/util.service';
+import { CommandResourceService } from 'src/app/api/services/command-resource.service';
 import { CommonService } from './../../services/common.service';
 import { QueryResourceService } from 'src/app/api/services/query-resource.service';
 import { AddEmployeComponent } from './../../components/add-employe/add-employe.component';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Driver, DriverDTO, CompanyDTO } from 'src/app/api/models';
+import { utils } from 'protractor';
 
 @Component({
   selector: 'app-employes',
@@ -15,7 +18,9 @@ export class EmployesPage implements OnInit {
   constructor(private actionSheetController:ActionSheetController,
     private modalController:ModalController,
     private queryResourceService:QueryResourceService,
-    private commonService:CommonService) { }
+    private commonService:CommonService,
+    private commandService:CommandResourceService,
+    private utilService:UtilService) { }
 
 
     drivers:DriverDTO[]=[];
@@ -51,33 +56,37 @@ export class EmployesPage implements OnInit {
 
     modal.onDidDismiss().then((data: any) => {
       console.log('[]<>[]', data.data.newDriver.id);
-      if (data.data.newDriver.id === '')
+      if (data.data.newDriver.id !==null)
         this.drivers.push(data.data.newDriver);
       });
     return await modal.present();
   }
 
-  async editPresentModal() {
+  async editPresentModal(driver:DriverDTO) {
+    console.log('driver to be edited  ',driver);
     const modal = await this.modalController.create({
       component: AddEmployeComponent,
       componentProps: {
         'headerName': 'Edit Employe',
-        
+        'driver':driver
       }
     });
 
-    // modal.onDidDismiss().then((data: any) => {
-    //   console.log('[]<>[]', data.data.newVehicle.registerNo);
-    //   if (data.data.newVehicle.registerNo != '')
-    //     this.vehicles.push(data.data.newVehicle);
+    modal.onDidDismiss().then((data: any) => {
+      console.log('[]<>[]', data.data.newDriver.id);
+      if (data.data.newDriver.id != null){
+        // this.drivers.push(data.data.newVehicle);
+        this.drivers.splice(this.drivers.indexOf(driver),1);
+        this.drivers.push(data.data.newDriver);
+      }
 
 
-    // });
+    });
     return await modal.present();
   }
 
 
-  async presentActionSheet() {
+  async presentActionSheet(driver:DriverDTO) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Options',
       buttons: [{
@@ -85,12 +94,13 @@ export class EmployesPage implements OnInit {
         role: 'destructive',
         icon: 'trash',
         handler: () => {
+          this.delete(driver);
         }
       },  {
         text: 'Edit',
         icon: 'create',
         handler: () => {
-          this.editPresentModal();
+          this.editPresentModal(driver);
         }
       }, {
         text: 'Cancel',
@@ -103,5 +113,19 @@ export class EmployesPage implements OnInit {
     });
     await actionSheet.present();
   }
+
+delete(driver){
+  console.log('driver to be deleted  ',driver.id);
+
+  this.commandService.deleteDriverUsingDELETE(driver.id).subscribe(res1=>{
+    console.log('deleted driver completed ',res1);
+    this.drivers.splice(this.drivers.indexOf(driver),1);
+  },
+  err1=>{
+    console.log('error deleting driver  ',err1);
+    this.utilService.createToast('! ops server might be down try agign later ');
+
+  })
+}
 
 }
