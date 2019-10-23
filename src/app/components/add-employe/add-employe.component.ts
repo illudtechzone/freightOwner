@@ -30,7 +30,11 @@ export class AddEmployeComponent implements OnInit {
 
    }
 
+   async getDocuments(){
   
+    // this.queryService.
+    
+  }
 
   dismiss() {
 
