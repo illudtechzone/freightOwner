@@ -7,10 +7,10 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { DriverDocumentDTO } from '../models/driver-document-dto';
 import { CompanyDTO } from '../models/company-dto';
 import { CustomerDTO } from '../models/customer-dto';
 import { DriverDTO } from '../models/driver-dto';
+import { DriverDocumentDTO } from '../models/driver-document-dto';
 import { FreightDTO } from '../models/freight-dto';
 import { QuotationDTO } from '../models/quotation-dto';
 import { VehicleDTO } from '../models/vehicle-dto';
@@ -24,13 +24,13 @@ import { CustomerStatus } from '../models/customer-status';
   providedIn: 'root',
 })
 class CommandResourceService extends __BaseService {
-  static readonly createDriverDocumnetUsingPOSTPath = '/api/command/create';
   static readonly createCompanyUsingPOSTPath = '/api/command/create/company';
   static readonly createcompanyIfnotExistUsingPOSTPath = '/api/command/create/company/ifnotexist';
   static readonly createCustomerUsingPOSTPath = '/api/command/create/customer';
   static readonly createcustomerIfnotExistUsingPOSTPath = '/api/command/create/customer/ifnotexist';
   static readonly createDriverUsingPOSTPath = '/api/command/create/driver';
   static readonly createdriverIfnotExistUsingPOSTPath = '/api/command/create/driver/ifnotexist';
+  static readonly createDriverDocumnetUsingPOSTPath = '/api/command/create/driverdocument';
   static readonly createFreightUsingPOSTPath = '/api/command/create/freight';
   static readonly createQuotationUsingPOSTPath = '/api/command/create/quotation';
   static readonly createVehicleUsingPOSTPath = '/api/command/create/vehicle';
@@ -39,11 +39,12 @@ class CommandResourceService extends __BaseService {
   static readonly deleteVehicleUsingDELETEPath = '/api/command/delete/vehicle/{vehicleId}/{vehicleLookupId}';
   static readonly deleteDriverUsingDELETEPath = '/api/command/deletedriver/{driverId}';
   static readonly sendQuatationUsingPOSTPath = '/api/command/sendQuatation/{taskId}';
-  static readonly updateDriverDocumnetUsingPUTPath = '/api/command/update';
   static readonly updateCompanyUsingPUTPath = '/api/command/update/company';
   static readonly updateCustomerUsingPUTPath = '/api/command/update/customer';
   static readonly updateDriverUsingPUTPath = '/api/command/update/driver';
+  static readonly updateDriverDocumnetUsingPUTPath = '/api/command/update/driverdocument';
   static readonly updateFreightUsingPUTPath = '/api/command/update/freight';
+  static readonly updateQuotationUsingPUTPath = '/api/command/update/quotation';
   static readonly updateVehicleUsingPUTPath = '/api/command/update/vehicle';
   static readonly updateVehicleLookUpUsingPUTPath = '/api/command/update/vehiclelookup';
   static readonly deleteDriverDocumnetUsingDELETEPath = '/api/command/update/{driverdocumentId}';
@@ -54,42 +55,6 @@ class CommandResourceService extends __BaseService {
     http: HttpClient
   ) {
     super(config, http);
-  }
-
-  /**
-   * @param driDocDTO driDocDTO
-   * @return OK
-   */
-  createDriverDocumnetUsingPOSTResponse(driDocDTO: DriverDocumentDTO): __Observable<__StrictHttpResponse<DriverDocumentDTO>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = driDocDTO;
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/api/command/create`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<DriverDocumentDTO>;
-      })
-    );
-  }
-  /**
-   * @param driDocDTO driDocDTO
-   * @return OK
-   */
-  createDriverDocumnetUsingPOST(driDocDTO: DriverDocumentDTO): __Observable<DriverDocumentDTO> {
-    return this.createDriverDocumnetUsingPOSTResponse(driDocDTO).pipe(
-      __map(_r => _r.body as DriverDocumentDTO)
-    );
   }
 
   /**
@@ -305,6 +270,42 @@ class CommandResourceService extends __BaseService {
   createdriverIfnotExistUsingPOST(driverDTO: DriverDTO): __Observable<DriverDTO> {
     return this.createdriverIfnotExistUsingPOSTResponse(driverDTO).pipe(
       __map(_r => _r.body as DriverDTO)
+    );
+  }
+
+  /**
+   * @param driDocDTO driDocDTO
+   * @return OK
+   */
+  createDriverDocumnetUsingPOSTResponse(driDocDTO: DriverDocumentDTO): __Observable<__StrictHttpResponse<DriverDocumentDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = driDocDTO;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/command/create/driverdocument`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<DriverDocumentDTO>;
+      })
+    );
+  }
+  /**
+   * @param driDocDTO driDocDTO
+   * @return OK
+   */
+  createDriverDocumnetUsingPOST(driDocDTO: DriverDocumentDTO): __Observable<DriverDocumentDTO> {
+    return this.createDriverDocumnetUsingPOSTResponse(driDocDTO).pipe(
+      __map(_r => _r.body as DriverDocumentDTO)
     );
   }
 
@@ -616,42 +617,6 @@ class CommandResourceService extends __BaseService {
   }
 
   /**
-   * @param driDocDTO driDocDTO
-   * @return OK
-   */
-  updateDriverDocumnetUsingPUTResponse(driDocDTO: DriverDocumentDTO): __Observable<__StrictHttpResponse<DriverDocumentDTO>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = driDocDTO;
-    let req = new HttpRequest<any>(
-      'PUT',
-      this.rootUrl + `/api/command/update`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<DriverDocumentDTO>;
-      })
-    );
-  }
-  /**
-   * @param driDocDTO driDocDTO
-   * @return OK
-   */
-  updateDriverDocumnetUsingPUT(driDocDTO: DriverDocumentDTO): __Observable<DriverDocumentDTO> {
-    return this.updateDriverDocumnetUsingPUTResponse(driDocDTO).pipe(
-      __map(_r => _r.body as DriverDocumentDTO)
-    );
-  }
-
-  /**
    * @param company company
    * @return OK
    */
@@ -760,6 +725,42 @@ class CommandResourceService extends __BaseService {
   }
 
   /**
+   * @param driDocDTO driDocDTO
+   * @return OK
+   */
+  updateDriverDocumnetUsingPUTResponse(driDocDTO: DriverDocumentDTO): __Observable<__StrictHttpResponse<DriverDocumentDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = driDocDTO;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/api/command/update/driverdocument`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<DriverDocumentDTO>;
+      })
+    );
+  }
+  /**
+   * @param driDocDTO driDocDTO
+   * @return OK
+   */
+  updateDriverDocumnetUsingPUT(driDocDTO: DriverDocumentDTO): __Observable<DriverDocumentDTO> {
+    return this.updateDriverDocumnetUsingPUTResponse(driDocDTO).pipe(
+      __map(_r => _r.body as DriverDocumentDTO)
+    );
+  }
+
+  /**
    * @param freight freight
    * @return OK
    */
@@ -792,6 +793,42 @@ class CommandResourceService extends __BaseService {
   updateFreightUsingPUT(freight: FreightDTO): __Observable<FreightDTO> {
     return this.updateFreightUsingPUTResponse(freight).pipe(
       __map(_r => _r.body as FreightDTO)
+    );
+  }
+
+  /**
+   * @param quotationDTO quotationDTO
+   * @return OK
+   */
+  updateQuotationUsingPUTResponse(quotationDTO: QuotationDTO): __Observable<__StrictHttpResponse<QuotationDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = quotationDTO;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/api/command/update/quotation`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<QuotationDTO>;
+      })
+    );
+  }
+  /**
+   * @param quotationDTO quotationDTO
+   * @return OK
+   */
+  updateQuotationUsingPUT(quotationDTO: QuotationDTO): __Observable<QuotationDTO> {
+    return this.updateQuotationUsingPUTResponse(quotationDTO).pipe(
+      __map(_r => _r.body as QuotationDTO)
     );
   }
 

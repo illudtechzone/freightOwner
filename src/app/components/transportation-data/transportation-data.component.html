@@ -1,5 +1,5 @@
-<ion-card style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-
+<ion-card style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+<div (click)="moreInfo();">
   <ion-item>
     <ion-card-subtitle>{{(customer|async)?.name}}</ion-card-subtitle>
 
@@ -7,12 +7,12 @@
       <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
     </ion-avatar>
   </ion-item>
-  <ion-card-content>
+  <ion-card-content  style="border-bottom: 3px solid #5855b1;">
     <ion-text>Phone:{{(customer|async)?.phoneNumber}}</ion-text>
   </ion-card-content>
-
-  <div (click)="moreInfo()">
-    <ion-card-header style="border-top: 3px solid #5855b1;">
+</div>
+  <div  *ngIf="freightView.isMoreInfo">
+    <ion-card-header >
       <ion-text color="primary"><b><I>Pickup</I></b></ion-text>
     </ion-card-header>
     <ion-card-content>
@@ -35,40 +35,29 @@
         </i>
       </ion-text>
     </ion-card-content>
-    <ion-item line="full" *ngIf="freightView.freight.estimatedAmount" >
-
-          <ion-input type="number" placeholder=" Ruogh budget in numbers ex:1999 " [value]="freightView.freight.estimatedAmount"
-          readonly="!freightView.isEdit">Rs
-        </ion-input>
-
-
-
-      <ion-text slot="end"> Customer budget</ion-text>
-    </ion-item>
-  </div>
-  <div *ngIf="freightView.isMoreInfo">
-    <ion-item>
+ 
+    <ion-item lines="none">
 
       <ion-label>Goods Type</ion-label>
       <ion-text slot="end">Wood  {{freightView.freight.type}}</ion-text>
     </ion-item>
-    <ion-item>
-      <ion-input type="text" placeholder=" Ruogh goods weight in kg ex:1000" [value]="freightView.freight.weight" readonly="!freightView.isEdit"></ion-input>
-      <ion-text slot="end">kg</ion-text>
+    <ion-item lines="none">
+      <ion-text slot="end"   readonly="!freightView.isEdit">{{freightView.freight.weight}}</ion-text>
+      <ion-text slot="start">Ton</ion-text>
 
     </ion-item>
 
-    <ion-item line="full">
-      <ion-text>
+    <ion-item lines="none">
+      <ion-text slot="end">
          {{freightView.freight.length}} L * {{freightView.freight.width}} W * {{freightView.freight.height}} H    23*34*56
       </ion-text>
-      <ion-text slot="end">volume</ion-text>
+      <ion-text slot="start">Volume</ion-text>
     </ion-item>
-    <ion-item>
+    <ion-item lines="none">
       <ion-label>Delivery date</ion-label>
       <ion-datetime display-format="D, MMMM YYYY" picker-format="DD MM YYYY" [value]="freightView.freight.deliveryDate" readonly="!freightView.isEdit"></ion-datetime>
     </ion-item>
-    <ion-item line="full">
+    <ion-item lines="none">
       <ion-label>Fragile</ion-label>
       <ion-icon name="checkbox-outline" color="primary" *ngIf="freightView.freight.fragile"></ion-icon>
       <ion-icon name="square-outline" *ngIf="!freightView.freight.fragile"></ion-icon>
@@ -76,6 +65,17 @@
 
 
   </div>
+  <ion-item lines="none" *ngIf="freightView.freight.estimatedAmount" >
+
+    <ion-text slot="end" 
+      readonly="!freightView.isEdit">{{freightView.freight.estimatedAmount}}
+    </ion-text>
+
+
+
+  <ion-text slot="start"> Customer budget INR</ion-text>
+</ion-item>
+
   <div *ngIf="quoatationList ;let ql">
   <ion-list *ngIf="(quoatationList.length == 0)  ">
     <ion-item>

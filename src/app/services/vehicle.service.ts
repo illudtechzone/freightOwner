@@ -27,7 +27,7 @@ export class VehicleService {
       this.commonService.getCompany().then((res: any) => {
         this.company = res;
         if (this.company !== null) {
-          console.log('if is  ',this.company !== null);
+          console.log('if is >>>>>>>>>>>> ',this.company !== null);
 
           this.queryResource.findAllvehiclesUsingGET({ companyIdpCode: this.company.companyIdpCode }).subscribe((res1: any) => {
             console.log('vehicles are ', res1);

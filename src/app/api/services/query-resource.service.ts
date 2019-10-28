@@ -7,12 +7,12 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { Company } from '../models/company';
-import { Customer } from '../models/customer';
-import { Driver } from '../models/driver';
+import { CompanyDTO } from '../models/company-dto';
+import { CustomerDTO } from '../models/customer-dto';
+import { DriverDTO } from '../models/driver-dto';
 import { FreightDTO } from '../models/freight-dto';
-import { VehicleLookUp } from '../models/vehicle-look-up';
-import { Quotation } from '../models/quotation';
+import { VehicleLookUpDTO } from '../models/vehicle-look-up-dto';
+import { QuotationDTO } from '../models/quotation-dto';
 import { VehicleDTO } from '../models/vehicle-dto';
 import { DataResponse } from '../models/data-response';
 
@@ -54,7 +54,7 @@ class QueryResourceService extends __BaseService {
    * @param id id
    * @return OK
    */
-  findCompanyByIdUsingGETResponse(id: number): __Observable<__StrictHttpResponse<Company>> {
+  findCompanyByIdUsingGETResponse(id: number): __Observable<__StrictHttpResponse<CompanyDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -72,7 +72,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Company>;
+        return _r as __StrictHttpResponse<CompanyDTO>;
       })
     );
   }
@@ -80,9 +80,9 @@ class QueryResourceService extends __BaseService {
    * @param id id
    * @return OK
    */
-  findCompanyByIdUsingGET(id: number): __Observable<Company> {
+  findCompanyByIdUsingGET(id: number): __Observable<CompanyDTO> {
     return this.findCompanyByIdUsingGETResponse(id).pipe(
-      __map(_r => _r.body as Company)
+      __map(_r => _r.body as CompanyDTO)
     );
   }
 
@@ -90,7 +90,7 @@ class QueryResourceService extends __BaseService {
    * @param id id
    * @return OK
    */
-  findCustomerByIdUsingGETResponse(id: number): __Observable<__StrictHttpResponse<Customer>> {
+  findCustomerByIdUsingGETResponse(id: number): __Observable<__StrictHttpResponse<CustomerDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -108,7 +108,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Customer>;
+        return _r as __StrictHttpResponse<CustomerDTO>;
       })
     );
   }
@@ -116,9 +116,9 @@ class QueryResourceService extends __BaseService {
    * @param id id
    * @return OK
    */
-  findCustomerByIdUsingGET(id: number): __Observable<Customer> {
+  findCustomerByIdUsingGET(id: number): __Observable<CustomerDTO> {
     return this.findCustomerByIdUsingGETResponse(id).pipe(
-      __map(_r => _r.body as Customer)
+      __map(_r => _r.body as CustomerDTO)
     );
   }
 
@@ -126,7 +126,7 @@ class QueryResourceService extends __BaseService {
    * @param id id
    * @return OK
    */
-  findDriverByIdUsingGETResponse(id: number): __Observable<__StrictHttpResponse<Driver>> {
+  findDriverByIdUsingGETResponse(id: number): __Observable<__StrictHttpResponse<DriverDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -144,7 +144,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Driver>;
+        return _r as __StrictHttpResponse<DriverDTO>;
       })
     );
   }
@@ -152,9 +152,9 @@ class QueryResourceService extends __BaseService {
    * @param id id
    * @return OK
    */
-  findDriverByIdUsingGET(id: number): __Observable<Driver> {
+  findDriverByIdUsingGET(id: number): __Observable<DriverDTO> {
     return this.findDriverByIdUsingGETResponse(id).pipe(
-      __map(_r => _r.body as Driver)
+      __map(_r => _r.body as DriverDTO)
     );
   }
 
@@ -198,7 +198,7 @@ class QueryResourceService extends __BaseService {
    * @param id id
    * @return OK
    */
-  findVehicleLookUpByIdUsingGETResponse(id: number): __Observable<__StrictHttpResponse<VehicleLookUp>> {
+  findVehicleLookUpByIdUsingGETResponse(id: number): __Observable<__StrictHttpResponse<VehicleLookUpDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -216,7 +216,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<VehicleLookUp>;
+        return _r as __StrictHttpResponse<VehicleLookUpDTO>;
       })
     );
   }
@@ -224,9 +224,9 @@ class QueryResourceService extends __BaseService {
    * @param id id
    * @return OK
    */
-  findVehicleLookUpByIdUsingGET(id: number): __Observable<VehicleLookUp> {
+  findVehicleLookUpByIdUsingGET(id: number): __Observable<VehicleLookUpDTO> {
     return this.findVehicleLookUpByIdUsingGETResponse(id).pipe(
-      __map(_r => _r.body as VehicleLookUp)
+      __map(_r => _r.body as VehicleLookUpDTO)
     );
   }
 
@@ -300,7 +300,7 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllDriversByCompanyIdpCodeUsingGETResponse(params: QueryResourceService.FindAllDriversByCompanyIdpCodeUsingGETParams): __Observable<__StrictHttpResponse<Array<Driver>>> {
+  findAllDriversByCompanyIdpCodeUsingGETResponse(params: QueryResourceService.FindAllDriversByCompanyIdpCodeUsingGETParams): __Observable<__StrictHttpResponse<Array<DriverDTO>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -321,7 +321,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Driver>>;
+        return _r as __StrictHttpResponse<Array<DriverDTO>>;
       })
     );
   }
@@ -338,9 +338,9 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllDriversByCompanyIdpCodeUsingGET(params: QueryResourceService.FindAllDriversByCompanyIdpCodeUsingGETParams): __Observable<Array<Driver>> {
+  findAllDriversByCompanyIdpCodeUsingGET(params: QueryResourceService.FindAllDriversByCompanyIdpCodeUsingGETParams): __Observable<Array<DriverDTO>> {
     return this.findAllDriversByCompanyIdpCodeUsingGETResponse(params).pipe(
-      __map(_r => _r.body as Array<Driver>)
+      __map(_r => _r.body as Array<DriverDTO>)
     );
   }
 
@@ -476,7 +476,7 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllQuotationsUsingGETResponse(params: QueryResourceService.FindAllQuotationsUsingGETParams): __Observable<__StrictHttpResponse<Array<Quotation>>> {
+  findAllQuotationsUsingGETResponse(params: QueryResourceService.FindAllQuotationsUsingGETParams): __Observable<__StrictHttpResponse<Array<QuotationDTO>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -497,7 +497,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Quotation>>;
+        return _r as __StrictHttpResponse<Array<QuotationDTO>>;
       })
     );
   }
@@ -514,9 +514,9 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllQuotationsUsingGET(params: QueryResourceService.FindAllQuotationsUsingGETParams): __Observable<Array<Quotation>> {
+  findAllQuotationsUsingGET(params: QueryResourceService.FindAllQuotationsUsingGETParams): __Observable<Array<QuotationDTO>> {
     return this.findAllQuotationsUsingGETResponse(params).pipe(
-      __map(_r => _r.body as Array<Quotation>)
+      __map(_r => _r.body as Array<QuotationDTO>)
     );
   }
 
@@ -535,7 +535,7 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllQuotationsByCompanyIdAndFreightIdUsingGETResponse(params: QueryResourceService.FindAllQuotationsByCompanyIdAndFreightIdUsingGETParams): __Observable<__StrictHttpResponse<Array<Quotation>>> {
+  findAllQuotationsByCompanyIdAndFreightIdUsingGETResponse(params: QueryResourceService.FindAllQuotationsByCompanyIdAndFreightIdUsingGETParams): __Observable<__StrictHttpResponse<Array<QuotationDTO>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -557,7 +557,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Quotation>>;
+        return _r as __StrictHttpResponse<Array<QuotationDTO>>;
       })
     );
   }
@@ -576,9 +576,9 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllQuotationsByCompanyIdAndFreightIdUsingGET(params: QueryResourceService.FindAllQuotationsByCompanyIdAndFreightIdUsingGETParams): __Observable<Array<Quotation>> {
+  findAllQuotationsByCompanyIdAndFreightIdUsingGET(params: QueryResourceService.FindAllQuotationsByCompanyIdAndFreightIdUsingGETParams): __Observable<Array<QuotationDTO>> {
     return this.findAllQuotationsByCompanyIdAndFreightIdUsingGETResponse(params).pipe(
-      __map(_r => _r.body as Array<Quotation>)
+      __map(_r => _r.body as Array<QuotationDTO>)
     );
   }
 
@@ -595,7 +595,7 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllQuotationsByCompanyIdUsingGETResponse(params: QueryResourceService.FindAllQuotationsByCompanyIdUsingGETParams): __Observable<__StrictHttpResponse<Array<Quotation>>> {
+  findAllQuotationsByCompanyIdUsingGETResponse(params: QueryResourceService.FindAllQuotationsByCompanyIdUsingGETParams): __Observable<__StrictHttpResponse<Array<QuotationDTO>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -616,7 +616,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Quotation>>;
+        return _r as __StrictHttpResponse<Array<QuotationDTO>>;
       })
     );
   }
@@ -633,9 +633,9 @@ class QueryResourceService extends __BaseService {
    *
    * @return OK
    */
-  findAllQuotationsByCompanyIdUsingGET(params: QueryResourceService.FindAllQuotationsByCompanyIdUsingGETParams): __Observable<Array<Quotation>> {
+  findAllQuotationsByCompanyIdUsingGET(params: QueryResourceService.FindAllQuotationsByCompanyIdUsingGETParams): __Observable<Array<QuotationDTO>> {
     return this.findAllQuotationsByCompanyIdUsingGETResponse(params).pipe(
-      __map(_r => _r.body as Array<Quotation>)
+      __map(_r => _r.body as Array<QuotationDTO>)
     );
   }
 
@@ -838,7 +838,7 @@ class QueryResourceService extends __BaseService {
    * @param companyIdpCode companyIdpCode
    * @return OK
    */
-  searchCompanyIDPCodeUsingGETResponse(companyIdpCode: string): __Observable<__StrictHttpResponse<Company>> {
+  searchCompanyIDPCodeUsingGETResponse(companyIdpCode: string): __Observable<__StrictHttpResponse<CompanyDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -856,7 +856,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Company>;
+        return _r as __StrictHttpResponse<CompanyDTO>;
       })
     );
   }
@@ -864,9 +864,9 @@ class QueryResourceService extends __BaseService {
    * @param companyIdpCode companyIdpCode
    * @return OK
    */
-  searchCompanyIDPCodeUsingGET(companyIdpCode: string): __Observable<Company> {
+  searchCompanyIDPCodeUsingGET(companyIdpCode: string): __Observable<CompanyDTO> {
     return this.searchCompanyIDPCodeUsingGETResponse(companyIdpCode).pipe(
-      __map(_r => _r.body as Company)
+      __map(_r => _r.body as CompanyDTO)
     );
   }
 
@@ -874,7 +874,7 @@ class QueryResourceService extends __BaseService {
    * @param customerIdpCode customerIdpCode
    * @return OK
    */
-  searchCustomerIDPCodeUsingGETResponse(customerIdpCode: string): __Observable<__StrictHttpResponse<Customer>> {
+  searchCustomerIDPCodeUsingGETResponse(customerIdpCode: string): __Observable<__StrictHttpResponse<CustomerDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -892,7 +892,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Customer>;
+        return _r as __StrictHttpResponse<CustomerDTO>;
       })
     );
   }
@@ -900,9 +900,9 @@ class QueryResourceService extends __BaseService {
    * @param customerIdpCode customerIdpCode
    * @return OK
    */
-  searchCustomerIDPCodeUsingGET(customerIdpCode: string): __Observable<Customer> {
+  searchCustomerIDPCodeUsingGET(customerIdpCode: string): __Observable<CustomerDTO> {
     return this.searchCustomerIDPCodeUsingGETResponse(customerIdpCode).pipe(
-      __map(_r => _r.body as Customer)
+      __map(_r => _r.body as CustomerDTO)
     );
   }
 
@@ -910,7 +910,7 @@ class QueryResourceService extends __BaseService {
    * @param driverIdpCode driverIdpCode
    * @return OK
    */
-  searchDriverIDPCodeUsingGETResponse(driverIdpCode: string): __Observable<__StrictHttpResponse<Driver>> {
+  searchDriverIDPCodeUsingGETResponse(driverIdpCode: string): __Observable<__StrictHttpResponse<DriverDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -928,7 +928,7 @@ class QueryResourceService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Driver>;
+        return _r as __StrictHttpResponse<DriverDTO>;
       })
     );
   }
@@ -936,9 +936,9 @@ class QueryResourceService extends __BaseService {
    * @param driverIdpCode driverIdpCode
    * @return OK
    */
-  searchDriverIDPCodeUsingGET(driverIdpCode: string): __Observable<Driver> {
+  searchDriverIDPCodeUsingGET(driverIdpCode: string): __Observable<DriverDTO> {
     return this.searchDriverIDPCodeUsingGETResponse(driverIdpCode).pipe(
-      __map(_r => _r.body as Driver)
+      __map(_r => _r.body as DriverDTO)
     );
   }
 

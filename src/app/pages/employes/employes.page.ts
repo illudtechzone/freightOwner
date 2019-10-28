@@ -5,7 +5,7 @@ import { QueryResourceService } from 'src/app/api/services/query-resource.servic
 import { AddEmployeComponent } from './../../components/add-employe/add-employe.component';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Driver, DriverDTO, CompanyDTO } from 'src/app/api/models';
+import {  DriverDTO, CompanyDTO } from 'src/app/api/models';
 import { utils } from 'protractor';
 
 @Component({
@@ -30,7 +30,7 @@ export class EmployesPage implements OnInit {
     this.commonService.getCompany().then(res1=>{
       console.log('compadegrrgny is ',res1.companyIdpCode);
       this.companyDTO=res1;
-       this.queryResourceService.findAllDriversByCompanyIdpCodeUsingGET({companyIdpCode:'c1@gmail.com'}).subscribe(res2=>{
+       this.queryResourceService.findAllDriversByCompanyIdpCodeUsingGET({companyIdpCode:'com@gmail.com'}).subscribe(res2=>{
 
         console.log('drivers are  ',res2);
         this.drivers=res2;

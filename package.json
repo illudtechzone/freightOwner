@@ -28,7 +28,7 @@
     "@ionic/storage": "^2.2.0",
     "angular-oauth2-oidc": "^8.0.4",
     "angular-oauth2-oidc-b2c": "^1.0.26",
-    "cordova-android": "8.0.0",
+    "cordova-android": "^6.3.0",
     "cordova-sqlite-storage": "^3.3.0",
     "core-js": "^2.5.4",
     "keycloak-admin": "^1.12.0",

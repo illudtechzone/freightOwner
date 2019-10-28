@@ -2,7 +2,6 @@ import { QueryResourceService } from 'src/app/api/services/query-resource.servic
 import { UtilService } from 'src/app/services/util.service';
 import { DriverDTO } from './../../api/models/driver-dto';
 import { CommandResourceService } from 'src/app/api/services';
-import { Driver } from './../../api/models/driver';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { dismiss } from '@ionic/core/dist/types/utils/overlays';
