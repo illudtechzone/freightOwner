@@ -9,6 +9,10 @@ import { OwnerService } from 'src/app/services/owner.service';
 import { JhiWebSocketService } from 'src/app/services/jhi-web-socket.service';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
+
+
 
 @Component({
   selector: 'app-home',
@@ -34,6 +38,16 @@ export class HomePage implements OnInit {
     this.companyDto = await this.ownerService.getOwner();
     this.notification.connect(this.companyDto.companyIdpCode);
     this.notification.subscribe();
+this.notification.receive().subscribe(
+  
+  data=>{
+    console.log("Data ::::::::::::::::::::::::::"+data);
+ 
+ 
+ 
+  })
+
+
     this.utilService.createLoader()
     .then(loader => {
       loader.present();
