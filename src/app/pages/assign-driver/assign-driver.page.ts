@@ -38,17 +38,12 @@ export class AssignDriverPage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'Options',
       buttons: [{
-        text: 'Delete',
+        text: 'Assign',
         role: 'destructive',
-        icon: 'trash',
+        icon: 'checkmark',
         handler: () => {
         }
       },  {
-        text: 'Edit',
-        icon: 'create',
-        handler: () => {
-        }
-      }, {
         text: 'Cancel',
         icon: 'close',
         role: 'cancel',

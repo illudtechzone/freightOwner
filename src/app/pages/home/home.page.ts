@@ -8,6 +8,10 @@ import { OwnerService } from 'src/app/services/owner.service';
 import { JhiWebSocketService } from 'src/app/services/jhi-web-socket.service';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
+
+
 
 @Component({
   selector: 'app-home',
@@ -31,6 +35,18 @@ export class HomePage implements OnInit {
     const sample = await this.ownerService.getOwner();
     console.log('INit Method working ' + sample.id);
     this.companyDto = await this.ownerService.getOwner();
+    this.notification.connect(this.companyDto.companyIdpCode);
+    this.notification.subscribe();
+this.notification.receive().subscribe(
+  
+  data=>{
+    console.log("Data ::::::::::::::::::::::::::"+data);
+ 
+ 
+ 
+  })
+
+
     this.utilService.createLoader()
     .then(loader => {
       loader.present();
@@ -104,22 +120,25 @@ doRefresh(event) {
     });
 
     modal.onDidDismiss().then((data: any) => {
-       console.log('[]<>[]', data.data.freight);
-       if (data.data.freight.VehicleId != null) {
+       console.log('sssss[]<>[]', data.data.freight);
+       
+       this.fixedFreights.subscribe(data=>{
+         console.log("workingggggg"+data);
+       });
+        if (data.data.freight.vehicleId !=null)
 
         this.freights.forEach(res => {
           if (res.id = freight.id) {
             freight.vehicleId = data.data.freight.vehicleId;
 
+
           }
 
         });
-        }
+        
+        });
+  
+        return await modal.present();
 
-
-     });
-    return await modal.present();
-  }
-
-
+}
 }

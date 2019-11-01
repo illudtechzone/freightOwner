@@ -4,7 +4,7 @@ import { CommonService } from './../../services/common.service';
 import { Vehicle } from './../../dtos/vehicle';
 import { AddVehicleComponent } from './../../components/add-vehicle/add-vehicle.component';
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController, ActionSheetController } from '@ionic/angular';
+import { ModalController, ToastController, ActionSheetController, NavController } from '@ionic/angular';
 import { CompanyDTO } from 'src/app/api/models';
 import { QueryResourceService, CommandResourceService } from 'src/app/api/services';
 import { VehicleService } from 'src/app/services/vehicle.service';
@@ -17,13 +17,14 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 export class VehicleListPage implements OnInit {
 
   constructor(private modalController: ModalController,
-    private queryResource: QueryResourceService,
-    private commonService: CommonService,
-    private commandResourceService: CommandResourceService,
-    private utilService: UtilService,
-    private toastController: ToastController,
-    private actionSheetController:ActionSheetController,
-    private vehicleService:VehicleService) { }
+              private queryResource: QueryResourceService,
+              private commonService: CommonService,
+              private commandResourceService: CommandResourceService,
+              private utilService: UtilService,
+              private toastController: ToastController,
+              private actionSheetController: ActionSheetController,
+              private vehicleService: VehicleService,
+              private navController: NavController) { }
   vehicles: VehicleDTO[] = [];
   company: CompanyDTO = {};
   ngOnInit() {
@@ -31,7 +32,7 @@ export class VehicleListPage implements OnInit {
       .then(loader => {
         loader.present();
 
-          this.vehicleService.getVehicles().then((res1: any) => {
+        this.vehicleService.getVehicles().then((res1: any) => {
             console.log('vehicles are ', res1);
             this.vehicles = res1;
             loader.dismiss();
@@ -41,7 +42,7 @@ export class VehicleListPage implements OnInit {
             loader.dismiss();
 
           });
-       
+
 
       });
 
@@ -49,19 +50,20 @@ export class VehicleListPage implements OnInit {
 
 
   async presentModal() {
-    let vehicle: VehicleDTO = { registerNo: '' };
+    const vehicle: VehicleDTO = { registerNo: '' };
     const modal = await this.modalController.create({
       component: AddVehicleComponent,
       componentProps: {
-        'headerName': 'Add Vehicle',
-        'vehicle': vehicle,
+        headerName: 'Add Vehicle',
+        vehicle,
       }
     });
 
     modal.onDidDismiss().then((data: any) => {
       console.log('[]<>[]', data.data.newVehicle.registerNo);
-      if (data.data.newVehicle.registerNo != '')
+      if (data.data.newVehicle.registerNo !== '') {
         this.vehicles.push(data.data.newVehicle);
+      }
 
 
     });
@@ -73,8 +75,8 @@ export class VehicleListPage implements OnInit {
     const modal = await this.modalController.create({
       component: AddVehicleComponent,
       componentProps: {
-        'headerName': 'Edit Vehicle',
-        'vehicle': vehicle,
+        headerName: 'Edit Vehicle',
+        vehicle,
       }
     });
 
@@ -99,7 +101,15 @@ export class VehicleListPage implements OnInit {
   async presentActionSheet(vehicle: VehicleDTO) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Options',
-      buttons: [{
+      buttons: [
+        {
+          text: 'Assign Driver',
+          icon: 'person',
+          handler: () => {
+            this.navController.navigateForward('/assign-driver');
+          }
+        },
+        {
         text: 'Delete',
         role: 'destructive',
         icon: 'trash',
@@ -112,7 +122,8 @@ export class VehicleListPage implements OnInit {
         handler: () => {
           this.presentEditModal(vehicle);
         }
-      }, {
+      },
+    {
         text: 'Cancel',
         icon: 'close',
         role: 'cancel',
