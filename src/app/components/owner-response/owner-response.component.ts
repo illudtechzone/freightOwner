@@ -8,14 +8,14 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class OwnerResponseComponent implements OnInit {
   @Output() valueChange = new EventEmitter();
   constructor() { }
-  response:string='pending';
+  response = 'pending';
   ngOnInit() {}
-  accept(){
-    this.response='accept';
+  accept() {
+    this.response = 'accept';
     this.valueChange.emit(this.response);
   }
-  reject(){
-    this.response='reject';
+  reject() {
+    this.response = 'reject';
   }
 
 }

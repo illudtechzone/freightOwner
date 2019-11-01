@@ -14,7 +14,7 @@ export class CurrentUserService {
       if (this.user == null || force) {
         this.oathservice.loadUserProfile().then(
           (result: any) => {
-            console.log('sucess get user profile ', result);
+            console.log('sucess get user profile force=',force, result);
             this.user = result;
             resolve(this.user);
           },

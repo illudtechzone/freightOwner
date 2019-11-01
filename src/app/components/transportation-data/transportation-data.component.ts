@@ -1,6 +1,6 @@
 import { FreightView } from './../../dtos/freight-view';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FreightDTO, CustomerDTO, Customer, Quotation, QuotationDTO, CompanyDTO } from 'src/app/api/models';
+import { FreightDTO, CustomerDTO, QuotationDTO, CompanyDTO } from 'src/app/api/models';
 import { QueryResourceService, CommandResourceService } from 'src/app/api/services';
 import { Observable } from 'rxjs';
 import { OwnerService } from 'src/app/services/owner.service';
@@ -16,13 +16,13 @@ export class TransportationDataComponent implements OnInit {
   @Input('freight')
   freight: FreightDTO;
   @Input('quotation')
-  q: Quotation;
+  q: QuotationDTO;
   @Output()
   elementDeleted: EventEmitter<any> = new EventEmitter();
-  customer: Observable<Customer> ;
+  customer: Observable<CustomerDTO> ;
   quotation: QuotationDTO = {};
- quoatationList: Quotation[];
- quotationObservable: Observable<Quotation[]>;
+ quoatationList: QuotationDTO[];
+ quotationObservable: Observable<QuotationDTO[]>;
 
   companyDto: CompanyDTO = null;
   constructor(private queryResource: QueryResourceService, private commandResource: CommandResourceService
@@ -32,23 +32,21 @@ export class TransportationDataComponent implements OnInit {
 
  async ngOnInit() {
     this.companyDto = await this.ownerService.getOwner();
-    if(this.freight!=null){
+    if (this.freight != null) {
    this.getFreight();
-    }else
-    {
-      console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-      
+    } else {
+      console.log('ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss');
+
       this.queryResource.findFreightIdUsingGET(this.q.freightId).toPromise().then(
-        data=>{
-         this.freight=data;
-         this.getFreight(); 
+        data => {
+         this.freight = data;
+         this.getFreight();
         });
-      
+
     }
 
   }
-getFreight()
-{
+getFreight() {
   console.log('is more info', this.freight);
   this.freightView.freight = this.freight;
   this.customer = this.queryResource.findCustomerByIdUsingGET(this.freightView.freight.customerId);
@@ -56,7 +54,7 @@ getFreight()
   const params:
   QueryResourceService.FindAllQuotationsByCompanyIdAndFreightIdUsingGETParams = {freightId: this.freight.id, companyId: this.companyDto.id};
   // tslint:disable-next-line:max-line-length
-  console.log("freight id "+this.freight.id+"  company Id"+this.companyDto.id);
+  console.log('freight id ' + this.freight.id + '  company Id' + this.companyDto.id);
   this.quotationObservable = this.queryResource.findAllQuotationsByCompanyIdAndFreightIdUsingGET(params);
   this.quotationObservable.subscribe
   (data => {
@@ -74,20 +72,20 @@ getFreight()
     this.utilService.createLoader()
     .then(loader => {
       loader.present();
-     console.log('Send Quotation' + this.quotation.amount);
-     this.quotation.freightId = this.freightView.freight.id;
-     this.quotation.deliveryDate = this.freightView.freight.deliveryDate;
-     this.quotation.companyId =  this.ownerService.companyDto.id;
-     if (this.quotation.amount) {
+      console.log('Send Quotation' + this.quotation.amount);
+      this.quotation.freightId = this.freightView.freight.id;
+      this.quotation.deliveryDate = this.freightView.freight.deliveryDate;
+      this.quotation.companyId =  this.ownerService.companyDto.id;
+      if (this.quotation.amount) {
        this.commandResource.createQuotationUsingPOST(this.quotation).toPromise().then(x => {
          console.log('QUATATION sEND : ' + x);
          loader.dismiss();
          this.quotationObservable.subscribe(data => {
             console.log('Quatation List @@@@@@@@@@@@@  :: ' + data.length);
             this.quoatationList = data;
-          
+
           });
-        },err=>{
+        }, err => {
 
           loader.dismiss();
         }

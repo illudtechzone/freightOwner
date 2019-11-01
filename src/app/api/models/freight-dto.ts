@@ -1,7 +1,7 @@
 /* tslint:disable */
 export interface FreightDTO {
-  id?: number;
   acceptedStatus?: 'START' | 'COMPLETE' | 'NOT_STARTED';
+  companyId?: number;
   createdTime?: string;
   customerId?: number;
   deliveryDate?: string;
@@ -13,7 +13,7 @@ export interface FreightDTO {
   estimatedAmount?: number;
   fragile?: boolean;
   height?: number;
-  companyId?: number;
+  id?: number;
   length?: number;
   originalAmount?: number;
   pickupAddress?: string;
