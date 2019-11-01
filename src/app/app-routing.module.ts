@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
-    canActivate:[AuthGuardService]
+    canActivate: [AuthGuardService]
   },
   {
     path: 'login',
@@ -22,20 +22,22 @@ const routes: Routes = [
     loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignUpPageModule)
   },
   { path: 'select-place', loadChildren: './pages/select-place/select-place.module#SelectPlacePageModule',
-  canActivate:[AuthGuardService]
+  canActivate: [AuthGuardService]
 },
   { path: 'vehicle-list', loadChildren: './pages/vehicle-list/vehicle-list.module#VehicleListPageModule',
-  canActivate:[AuthGuardService]
+  canActivate: [AuthGuardService]
 },
   { path: 'vehicle-detail', loadChildren: './pages/vehicle-detail/vehicle-detail.module#VehicleDetailPageModule',
-  canActivate:[AuthGuardService]
+  canActivate: [AuthGuardService]
 },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule',
-  canActivate:[AuthGuardService] },
+  canActivate: [AuthGuardService] },
   { path: 'booking-list', loadChildren: './pages/booking-list/booking-list.module#BookingListPageModule',
-  canActivate:[AuthGuardService] },
+  canActivate: [AuthGuardService] },
   { path: 'employes', loadChildren: './pages/employes/employes.module#EmployesPageModule',
-  canActivate:[AuthGuardService] },
+  canActivate: [AuthGuardService] },
+  { path: 'assign-driver', loadChildren: './pages/assign-driver/assign-driver.module#AssignDriverPageModule' },
+
 ];
 
 @NgModule({

@@ -68,6 +68,7 @@ export class AppComponent {
     toast.present();
   }
   initializeApp() {
+    
     this.platform.ready().then(() => {
 
 // let status bar overlay webview

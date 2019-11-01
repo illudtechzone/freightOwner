@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>AssignDriver</ion-title>
+    <ion-buttons>
+      <ion-back-button>
+        <ion-icon slot="icon-only" name="add" lazy="false"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let driver of drivers" >
+
+    <br>
+    <ion-item  lines="full">
+        <ion-avatar slot="start">
+            <img src="https://png.pngtree.com/svg/20161113/man_1074208.png">
+        </ion-avatar>
+        <ion-text>
+            {{driver.name}}
+        </ion-text>
+        <ion-icon name="more" slot="end"  (click)="presentActionSheet(driver)"></ion-icon>
+    </ion-item>
+    <br>
+  </div>
+  
+ 
+ 
+</ion-content>
+ <ion-footer>
+    <ion-button expand="block">
+    select vehicle
+  </ion-button>
+ </ion-footer>
