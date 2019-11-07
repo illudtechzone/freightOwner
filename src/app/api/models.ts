@@ -11,3 +11,4 @@ export { User } from './models/user';
 export { UserDTO } from './models/user-dto';
 export { VehicleDTO } from './models/vehicle-dto';
 export { VehicleLookUpDTO } from './models/vehicle-look-up-dto';
+export { VehicleStaffDTO } from './models/vehicle-staff-dto';

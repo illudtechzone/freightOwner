@@ -30,9 +30,9 @@ export class OwnerService {
 }
 
 clearOwnerDetails() {
-  console.log("clear all owner details");
-this.companyDto = null;
-this.user = null;
+  console.log('clear all owner details');
+  this.companyDto = null;
+  this.user = null;
 
 }
 

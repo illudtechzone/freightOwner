@@ -1,3 +1,5 @@
+import { Router, NavigationExtras } from '@angular/router';
+import { Route } from './../../dtos/route';
 import { VehicleDTO } from './../../api/models/vehicle-dto';
 import { UtilService } from 'src/app/services/util.service';
 import { CommonService } from './../../services/common.service';
@@ -24,7 +26,8 @@ export class VehicleListPage implements OnInit {
               private toastController: ToastController,
               private actionSheetController: ActionSheetController,
               private vehicleService: VehicleService,
-              private navController: NavController) { }
+              private navController: NavController,
+              private route: Router) { }
   vehicles: VehicleDTO[] = [];
   company: CompanyDTO = {};
   ngOnInit() {
@@ -106,9 +109,17 @@ export class VehicleListPage implements OnInit {
           text: 'Assign Driver',
           icon: 'person',
           handler: () => {
-            this.navController.navigateForward('/assign-driver');
-          }
-        },
+           // this.navController.navigateForward('/assign-driver');
+           const navigationExtras: NavigationExtras = {
+            queryParams: {
+                vehicle: JSON.stringify(vehicle),
+
+            }
+        };
+
+           this.navController.navigateForward(['assign-driver'], navigationExtras);
+        }
+      },
         {
         text: 'Delete',
         role: 'destructive',

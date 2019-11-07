@@ -17,7 +17,7 @@ export class JhiWebSocketService {
   alreadyConnectedOnce = false;
   private subscription: Subscription;
 
-  private serverUrl = ' //35.232.29.128:8086/websocket/tracker';
+  private serverUrl = ' //35.193.1.70:8086/websocket/tracker';
 
   constructor() {
       this.connection = this.createConnection();
