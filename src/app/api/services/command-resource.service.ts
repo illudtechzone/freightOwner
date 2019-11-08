@@ -7,7 +7,6 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { VehicleStaffDTO } from '../models/vehicle-staff-dto';
 import { CompanyDTO } from '../models/company-dto';
 import { CustomerDTO } from '../models/customer-dto';
 import { DriverDTO } from '../models/driver-dto';
@@ -15,6 +14,7 @@ import { DriverDocumentDTO } from '../models/driver-document-dto';
 import { FreightDTO } from '../models/freight-dto';
 import { QuotationDTO } from '../models/quotation-dto';
 import { VehicleDTO } from '../models/vehicle-dto';
+import { VehicleStaffDTO } from '../models/vehicle-staff-dto';
 import { VehicleLookUpDTO } from '../models/vehicle-look-up-dto';
 import { CustomerStatus } from '../models/customer-status';
 
@@ -25,7 +25,6 @@ import { CustomerStatus } from '../models/customer-status';
   providedIn: 'root',
 })
 class CommandResourceService extends __BaseService {
-  static readonly assignVehicleStaffForDriverUsingPOSTPath = '/api/command/assignvehiclestaff/{staffId}/{vehicleId}';
   static readonly createCompanyUsingPOSTPath = '/api/command/create/company';
   static readonly createcompanyIfnotExistUsingPOSTPath = '/api/command/create/company/ifnotexist';
   static readonly createCustomerUsingPOSTPath = '/api/command/create/customer';
@@ -36,7 +35,7 @@ class CommandResourceService extends __BaseService {
   static readonly createFreightUsingPOSTPath = '/api/command/create/freight';
   static readonly createQuotationUsingPOSTPath = '/api/command/create/quotation';
   static readonly createVehicleUsingPOSTPath = '/api/command/create/vehicle';
-  static readonly createVehicleStaffUsingPOSTPath = '/api/command/create/vehicleStaff';
+  static readonly assignNewVehicleStaffUsingPOSTPath = '/api/command/create/vehicleStaff';
   static readonly createVehicleLookUpUsingPOSTPath = '/api/command/create/vehiclelookup';
   static readonly customerStatusUsingPOSTPath = '/api/command/customer/status/{taskId}';
   static readonly deleteVehicleUsingDELETEPath = '/api/command/delete/vehicle/{vehicleId}/{vehicleLookupId}';
@@ -49,7 +48,7 @@ class CommandResourceService extends __BaseService {
   static readonly updateFreightUsingPUTPath = '/api/command/update/freight';
   static readonly updateQuotationUsingPUTPath = '/api/command/update/quotation';
   static readonly updateVehicleUsingPUTPath = '/api/command/update/vehicle';
-  static readonly updateVehicleStaffUsingPUTPath = '/api/command/update/vehicleStaff';
+  static readonly reAssignVehicleStaffUsingPUTPath = '/api/command/update/vehicleStaff';
   static readonly updateVehicleLookUpUsingPUTPath = '/api/command/update/vehiclelookup';
   static readonly deleteDriverDocumnetUsingDELETEPath = '/api/command/update/{driverdocumentId}';
   static readonly assignVehicleUsingPOSTPath = '/api/command/updateFreight/{vehicleId}';
@@ -59,53 +58,6 @@ class CommandResourceService extends __BaseService {
     http: HttpClient
   ) {
     super(config, http);
-  }
-
-  /**
-   * @param params The `CommandResourceService.AssignVehicleStaffForDriverUsingPOSTParams` containing the following parameters:
-   *
-   * - `vehicleId`: vehicleId
-   *
-   * - `staffId`: staffId
-   *
-   * @return OK
-   */
-  assignVehicleStaffForDriverUsingPOSTResponse(params: CommandResourceService.AssignVehicleStaffForDriverUsingPOSTParams): __Observable<__StrictHttpResponse<VehicleStaffDTO>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-
-
-    let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/api/command/assignvehiclestaff/${params.staffId}/${params.vehicleId}`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<VehicleStaffDTO>;
-      })
-    );
-  }
-  /**
-   * @param params The `CommandResourceService.AssignVehicleStaffForDriverUsingPOSTParams` containing the following parameters:
-   *
-   * - `vehicleId`: vehicleId
-   *
-   * - `staffId`: staffId
-   *
-   * @return OK
-   */
-  assignVehicleStaffForDriverUsingPOST(params: CommandResourceService.AssignVehicleStaffForDriverUsingPOSTParams): __Observable<VehicleStaffDTO> {
-    return this.assignVehicleStaffForDriverUsingPOSTResponse(params).pipe(
-      __map(_r => _r.body as VehicleStaffDTO)
-    );
   }
 
   /**
@@ -472,7 +424,7 @@ class CommandResourceService extends __BaseService {
    * @param vehStaffDTO vehStaffDTO
    * @return OK
    */
-  createVehicleStaffUsingPOSTResponse(vehStaffDTO: VehicleStaffDTO): __Observable<__StrictHttpResponse<VehicleStaffDTO>> {
+  assignNewVehicleStaffUsingPOSTResponse(vehStaffDTO: VehicleStaffDTO): __Observable<__StrictHttpResponse<VehicleStaffDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -498,8 +450,8 @@ class CommandResourceService extends __BaseService {
    * @param vehStaffDTO vehStaffDTO
    * @return OK
    */
-  createVehicleStaffUsingPOST(vehStaffDTO: VehicleStaffDTO): __Observable<VehicleStaffDTO> {
-    return this.createVehicleStaffUsingPOSTResponse(vehStaffDTO).pipe(
+  assignNewVehicleStaffUsingPOST(vehStaffDTO: VehicleStaffDTO): __Observable<VehicleStaffDTO> {
+    return this.assignNewVehicleStaffUsingPOSTResponse(vehStaffDTO).pipe(
       __map(_r => _r.body as VehicleStaffDTO)
     );
   }
@@ -959,7 +911,7 @@ class CommandResourceService extends __BaseService {
    * @param vehStaffDTO vehStaffDTO
    * @return OK
    */
-  updateVehicleStaffUsingPUTResponse(vehStaffDTO: VehicleStaffDTO): __Observable<__StrictHttpResponse<VehicleStaffDTO>> {
+  reAssignVehicleStaffUsingPUTResponse(vehStaffDTO: VehicleStaffDTO): __Observable<__StrictHttpResponse<VehicleStaffDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -985,8 +937,8 @@ class CommandResourceService extends __BaseService {
    * @param vehStaffDTO vehStaffDTO
    * @return OK
    */
-  updateVehicleStaffUsingPUT(vehStaffDTO: VehicleStaffDTO): __Observable<VehicleStaffDTO> {
-    return this.updateVehicleStaffUsingPUTResponse(vehStaffDTO).pipe(
+  reAssignVehicleStaffUsingPUT(vehStaffDTO: VehicleStaffDTO): __Observable<VehicleStaffDTO> {
+    return this.reAssignVehicleStaffUsingPUTResponse(vehStaffDTO).pipe(
       __map(_r => _r.body as VehicleStaffDTO)
     );
   }
@@ -1110,22 +1062,6 @@ class CommandResourceService extends __BaseService {
 }
 
 module CommandResourceService {
-
-  /**
-   * Parameters for assignVehicleStaffForDriverUsingPOST
-   */
-  export interface AssignVehicleStaffForDriverUsingPOSTParams {
-
-    /**
-     * vehicleId
-     */
-    vehicleId: number;
-
-    /**
-     * staffId
-     */
-    staffId: number;
-  }
 
   /**
    * Parameters for customerStatusUsingPOST

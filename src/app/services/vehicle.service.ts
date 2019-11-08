@@ -1,3 +1,4 @@
+import { UtilService } from './util.service';
 import { QueryResourceService } from 'src/app/api/services/query-resource.service';
 import { CommonService } from './common.service';
 import { CommandResourceService } from 'src/app/api/services';
@@ -10,7 +11,8 @@ export class VehicleService {
   company: any;
 
   constructor(private commonService: CommonService,
-              private queryResource: QueryResourceService
+              private queryResource: QueryResourceService,
+             
   ) { }
 
 
